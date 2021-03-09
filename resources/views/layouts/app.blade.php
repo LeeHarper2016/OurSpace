@@ -21,6 +21,11 @@
         </style>
     </head>
     <body class="antialiased">
-    
+        <div class="w-1/4 h-screen bg-purple-400">
+        </div>
+        <div class="w-2/4 h-screen bg-purple-600">
+        </div>
+        <div class="w-1/4 h-screen bg-purple-400">
+        </div>
     </body>
 </html>
