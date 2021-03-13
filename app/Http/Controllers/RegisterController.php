@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -36,23 +37,26 @@ class RegisterController extends Controller
      *
     *************************************************************/
     public function registerUser(Request $request) {
-        if ($request->password !== $request->passwordCheck) {
-            return redirect('/register')
+        if ($request->password !== $request->passwordConfirm) {
+            return redirect()
+                ->back()
                 ->withErrors('The password combination entered was incorrect. Please try again');
         } else {
-            $request->validate([
+            $validateData = $request->validate([
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required'
             ]);
 
-            auth()->user()
-                ->fill([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => Hash::make($request->password),
-                ])
-                ->save();
+            $user = new User;
+
+            $user->fill([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $user->save();
 
             return redirect('/')->with(['status' => 'Registration successful!']);
         }
