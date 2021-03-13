@@ -11,15 +11,15 @@
             <input type="text" name="name" />
         </div>
         <div class="flex flex-col">
-            <label for="name">Email:</label>
+            <label for="email">Email:</label>
             <input type="email" name="email" />
         </div>
         <div class="flex flex-col">
-            <label for="name">Password:</label>
+            <label for="password">Password:</label>
             <input type="password" name="password" />
         </div>
         <div class="flex flex-col">
-            <label for="name">Confirm Password:</label>
+            <label for="passwordConfirm">Confirm Password:</label>
             <input type="password" name="passwordConfirm" />
         </div>
         <button type="submit" class="p-3 bg-gray-400 border border-black rounded w-20 ml-auto mr-auto">Submit</button>
