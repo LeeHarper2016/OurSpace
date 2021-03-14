@@ -35,6 +35,8 @@ class LoginController extends Controller
      *                errors if not..
      *
      * @param Request $request The total http request.
+     * @return Response Redirection to the homepage if successful, but to the form
+     *                  if there are any errors.
      *
      ****************************************************************************/
     public function loginUser(Request $request) {
@@ -51,6 +53,34 @@ class LoginController extends Controller
             } else {
                 return back()->withErrors(['The password entered is incorrect.']);
             }
+        } else {
+            return back()->withErrors(['This email is not associated with an account.']);
+        }
+    }
+
+    /****************************************************************************************
+     *
+     * Function: LoginController.logOutUser().
+     * Purpose: Logs out the current user, assuming they are already logged in.
+     * Precondition: The user is currently logged in.
+     * Postcondition: The user is no longer authenticated.
+     *
+     * @param Request $request
+     * @return Response The user is redirected to the homepage if successful, but redirected
+     *                  back if there are any errors.
+     *
+     ***************************************************************************************/
+    public function logOutUser(Request $request) {
+        $currentUser = auth()->user();
+
+        if (isset($currentUser)) {
+            Auth::logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerate();
+
+            return redirect('/');
         } else {
             return back()->withErrors(['This email is not associated with an account.']);
         }
