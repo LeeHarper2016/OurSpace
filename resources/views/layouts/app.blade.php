@@ -23,7 +23,7 @@
     </head>
     <body class="antialiased flex">
         <div class="inline-block w-1/4 h-screen bg-purple-400 border-r-2 border-purple-900">
-            {{-- @include('layouts.navigation') --}}
+             @include('layouts.navigation')
         </div>
         <div class="inline-block w-2/4 h-screen bg-purple-300">
             @yield('content')
