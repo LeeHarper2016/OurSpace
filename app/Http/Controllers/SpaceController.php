@@ -17,13 +17,23 @@ class SpaceController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a private listing of the resource.
      *
      * @return Response
      */
-    public function create()
+    public function privateIndex()
     {
         //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return View
+     */
+    public function create()
+    {
+        return view('spaces.create');
     }
 
     /**
