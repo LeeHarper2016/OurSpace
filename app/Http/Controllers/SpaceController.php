@@ -23,7 +23,7 @@ class SpaceController extends Controller
      *
      *************************************************************************/
     private function uploadImage(string $imagePath, UploadedFile $image) {
-        $image->store('public/' . $imagePath);
+        $image->store(public_path($imagePath));
 
         return Storage::url($imagePath . $image->hashName());
     }
