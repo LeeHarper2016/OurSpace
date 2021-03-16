@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Space;
 use Illuminate\Http\Request;
 
 class SpaceController extends Controller
@@ -36,15 +37,47 @@ class SpaceController extends Controller
         return view('spaces.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
+    /********************************************************************************
      *
-     * @param  Request  $request
-     * @return Response
-     */
+     * Function: SpaceController.store(Request $request)
+     * Purpose: Creates a new Space object using user-input data and stores
+     *          it within the database.
+     * Precondition: The form data is valid.
+     * Postcondition: A new Space model is instantiated.
+     *
+     * @param Request $request The full http request.
+     * @return Response A redirection to the homepage.
+     *
+     *******************************************************************************/
     public function store(Request $request)
     {
-        //
+        $validatedData = $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'icon_picture' => ['image', 'required'],
+            'banner_picture' => ['image', 'required']
+        ]);
+
+        $iconImagePath = 'public/images/space_icons';
+        $bannerImagePath = 'public/images/banner_images';
+
+        $finalIconPath = $iconImagePath . $validatedData['icon_picture']->hashName();
+        $finalBannerPath = $bannerImagePath . $validatedData['banner_picture']->hashName();
+
+        $validatedData['icon_picture']->store($iconImagePath);
+        $validatedData['banner_picture']->store($bannerImagePath);
+
+        $space = new Space;
+        $space->fill([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'icon_picture_path' => $finalIconPath,
+            'banner_picture_path' => $finalBannerPath
+        ]);
+
+        $space->save();
+
+        return redirect('/')->with(['status' => 'success']);
     }
 
     /**
