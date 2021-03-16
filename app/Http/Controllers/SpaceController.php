@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\UploadedFile;
+
 use App\Models\Space;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
@@ -23,19 +25,27 @@ class SpaceController extends Controller
      *
      *************************************************************************/
     private function uploadImage(string $imagePath, UploadedFile $image) {
-        $image->store(public_path($imagePath));
+        $imageName = $image->hashName();
+        $image->store($imagePath);
 
-        return Storage::url($imagePath . $image->hashName());
+        return Storage::url($imagePath . $imageName);
     }
 
-    /**
-     * Display a listing of the resource.
+    /***************************************************************************
      *
-     * @return Response
-     */
+     * Function: SpaceController.index()
+     * Purpose: Displays a list of all public spaces.
+     * Precondition: N/A.
+     * Post-condition: N/A.
+     *
+     * @return View The view containing the list of spaces.
+     *
+     *************************************************************************/
     public function index()
     {
-        //
+        $spaces = Space::all();
+
+        return view('spaces.show_public')->with(['spaces' => $spaces]);
     }
 
     /**
@@ -79,8 +89,8 @@ class SpaceController extends Controller
             'banner_picture' => ['image', 'required']
         ]);
 
-        $iconImagePath = 'images/space_icons/';
-        $bannerImagePath = 'images/banner_images/';
+        $iconImagePath = 'public/images/space_icons/';
+        $bannerImagePath = 'public/images/banner_images/';
 
         $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
         $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
