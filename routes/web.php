@@ -24,7 +24,7 @@ Route::get('/register', [RegisterController::class, 'view']);
 Route::get('/login', [LoginController::class, 'view']);
 Route::get('/logout', [LoginController::class, 'logOutUser']);
 
-Route::resource(SpaceController::class);
+Route::resource('spaces', SpaceController::class);
 
 Route::post('/users', [RegisterController::class, 'registerUser']);
 Route::post('/users/login', [LoginController::class, 'loginUser']);
