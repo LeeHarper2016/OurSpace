@@ -4,9 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Space;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
 {
+
+    /***************************************************************************
+     *
+     * Function: SpaceController.uploadImage()
+     * Purpose: Uploads an image to the server using a given path.
+     * Precondition: N/A.
+     * Post-condition: The image is uploaded to the server.
+     *
+     * @param String $imagePath The path that the image will be saved to.
+     * @param UploadedFile $image The image that will be saved to the server.
+     * @return string The final relative file path to the image.
+     *
+     *************************************************************************/
+    private function uploadImage(string $imagePath, UploadedFile $image) {
+        $image->store('public/' . $imagePath);
+
+        return Storage::url($imagePath . $image->hashName());
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -58,14 +79,11 @@ class SpaceController extends Controller
             'banner_picture' => ['image', 'required']
         ]);
 
-        $iconImagePath = 'public/images/space_icons';
-        $bannerImagePath = 'public/images/banner_images';
+        $iconImagePath = 'images/space_icons/';
+        $bannerImagePath = 'images/banner_images/';
 
-        $finalIconPath = $iconImagePath . $validatedData['icon_picture']->hashName();
-        $finalBannerPath = $bannerImagePath . $validatedData['banner_picture']->hashName();
-
-        $validatedData['icon_picture']->store($iconImagePath);
-        $validatedData['banner_picture']->store($bannerImagePath);
+        $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
+        $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
 
         $space = new Space;
         $space->fill([
