@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Client\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\ValidationException;
@@ -22,17 +23,28 @@ class SpaceController extends Controller
      * Postcondition: The form data is validated.
      *
      * @param Request $request The entire http request.
+     * @param bool $requireImages Determines whether images should be required.
      * @return array Array of the validated form view.
      * @throws ValidationException Exception thrown when the data is not successfully
      *                             validated.
-     *******************************************************************************/
-    private function validateFormData(Request $request) {
-        return $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required',
-            'icon_picture' => ['image', 'required'],
-            'banner_picture' => ['image', 'required']
-        ]);
+     ******************************************************************************
+     */
+    private function validateFormData(Request $request, bool $requireImages) {
+        if ($requireImages) {
+            return $this->validate($request, [
+                'name' => 'required',
+                'description' => 'required',
+                'icon_picture' => ['image', 'required'],
+                'banner_picture' => ['image', 'required']
+            ]);
+        } else {
+            return $this->validate($request, [
+                'name' => 'required',
+                'description' => 'required',
+                'icon_picture' => ['image', 'optional'],
+                'banner_picture' => ['image', 'optional']
+            ]);
+        }
     }
 
     /***************************************************************************
