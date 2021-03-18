@@ -41,8 +41,8 @@ class SpaceController extends Controller
             return $this->validate($request, [
                 'name' => 'required',
                 'description' => 'required',
-                'icon_picture' => ['image', 'optional'],
-                'banner_picture' => ['image', 'optional']
+                'icon_picture' => 'image',
+                'banner_picture' => 'image'
             ]);
         }
     }
@@ -176,7 +176,7 @@ class SpaceController extends Controller
      * @return Response
      */
     public function edit($id) {
-        $space = Space::find($id)->first();
+        $space = Space::find($id);
 
         return view('spaces.update')->with(['space' => $space]);
     }
@@ -194,7 +194,7 @@ class SpaceController extends Controller
         $iconImagePath = 'public/images/space_icons/';
         $bannerImagePath = 'public/images/banner_images/';
 
-        $space = Space::find($id)->first();
+        $space = Space::find($id);
 
         if (isset($validatedData['icon_picture'])) {
             $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
