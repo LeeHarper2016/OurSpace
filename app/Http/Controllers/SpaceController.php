@@ -99,8 +99,7 @@ class SpaceController extends Controller
      * @return View The view containing the list of spaces.
      *
      *************************************************************************/
-    public function index()
-    {
+    public function index() {
         $spaces = Space::all();
 
         return view('spaces.list')->with(['spaces' => $spaces]);
@@ -111,8 +110,7 @@ class SpaceController extends Controller
      *
      * @return Response
      */
-    public function privateIndex()
-    {
+    public function privateIndex() {
         //
     }
 
@@ -121,8 +119,7 @@ class SpaceController extends Controller
      *
      * @return View
      */
-    public function create()
-    {
+    public function create() {
         return view('spaces.create');
     }
 
@@ -138,9 +135,8 @@ class SpaceController extends Controller
      * @return Response A redirection to the homepage.
      *
      *******************************************************************************/
-    public function store(Request $request)
-    {
-        $validatedData = $this->validateFormData($request);
+    public function store(Request $request) {
+        $validatedData = $this->validateFormData($request, true);
 
         $iconImagePath = 'public/images/space_icons/';
         $bannerImagePath = 'public/images/banner_images/';
@@ -169,8 +165,7 @@ class SpaceController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -180,8 +175,7 @@ class SpaceController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $space = Space::find($id)->first();
 
         return view('spaces.update')->with(['space' => $space]);
@@ -194,9 +188,8 @@ class SpaceController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, int $id)
-    {
-        $validatedData = $this->validateFormData($request);
+    public function update(Request $request, int $id) {
+        $validatedData = $this->validateFormData($request, false);
 
         $iconImagePath = 'public/images/space_icons/';
         $bannerImagePath = 'public/images/banner_images/';
@@ -233,8 +226,7 @@ class SpaceController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }
