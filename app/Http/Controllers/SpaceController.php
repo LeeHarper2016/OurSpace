@@ -198,9 +198,9 @@ class SpaceController extends Controller
         }
 
         if (isset($validatedData['banner_picture'])) {
-            $bannerIconPath = $this->uploadImage(bannerImagePath, $validatedData['banner_picture']);
+            $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
         } else {
-            $bannerIconPath = $space->banner_picture_path;
+            $finalBannerPath = $space->banner_picture_path;
         }
 
         $space->fill([
