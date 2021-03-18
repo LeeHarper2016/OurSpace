@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserInSpace;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
 
@@ -11,6 +12,29 @@ use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
 {
+
+    /***************************************************************************
+     *
+     * Function: SpaceController.assignUserToSpace()
+     * Purpose: Uploads an image to the server using a given path.
+     * Precondition: N/A.
+     * Post-condition: The image is uploaded to the server.
+     *
+     * @param Space $space The space the current user is being assigned to.
+     * @param bool $isOwner Determines if the user is the owner of the space.
+     * @return string The final relative file path to the image.
+     *
+     **************************************************************************/
+    private function assignUserToSpace(Space $space, bool $isOwner) {
+        $spaceConnection = new UserInSpace;
+        $spaceConnection->fill([
+            'user_id' => auth()->user()->id,
+            'space_id' => $space->id,
+            'is_owner' => $isOwner
+        ]);
+
+        $spaceConnection->save();
+    }
 
     /***************************************************************************
      *
@@ -104,6 +128,8 @@ class SpaceController extends Controller
         ]);
 
         $space->save();
+
+        $this->assignUserToSpace($space, true);
 
         return redirect('/')->with(['status' => 'success']);
     }
