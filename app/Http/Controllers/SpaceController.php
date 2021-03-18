@@ -2,16 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserInSpace;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Validation\ValidationException;
 
 use App\Models\Space;
+use App\Models\UserInSpace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
 {
+
+    /*******************************************************************************
+     *
+     * Function: SpaceController.validateFormData()
+     * Purpose: Validates data pertaining to Spaces.
+     * Precondition: N/A.
+     * Postcondition: The form data is validated.
+     *
+     * @param Request $request The entire http request.
+     * @return array Array of the validated form view.
+     * @throws ValidationException Exception thrown when the data is not successfully
+     *                             validated.
+     *******************************************************************************/
+    private function validateFormData(Request $request) {
+        return $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'icon_picture' => ['image', 'required'],
+            'banner_picture' => ['image', 'required']
+        ]);
+    }
 
     /***************************************************************************
      *
@@ -106,12 +128,7 @@ class SpaceController extends Controller
      *******************************************************************************/
     public function store(Request $request)
     {
-        $validatedData = $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required',
-            'icon_picture' => ['image', 'required'],
-            'banner_picture' => ['image', 'required']
-        ]);
+        $validatedData = $this->validateFormData($request);
 
         $iconImagePath = 'public/images/space_icons/';
         $bannerImagePath = 'public/images/banner_images/';
