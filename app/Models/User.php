@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,4 +42,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /********************************************************************
+     *
+     * Function: User.spaces()
+     * Purpose: Retrieve a collection of all spaces that the user is in.
+     * Precondition: N/A.
+     * Posctondition: N/A.
+     *
+     * @return BelongsToMany The collection of spaces the user is in.
+     *
+     *******************************************************************/
+    public function spaces() {
+        return $this->belongsToMany(Space::class, 'user_in_spaces')
+            ->withPivot('is_owner')
+            ->withTimestamps();
+    }
 }
