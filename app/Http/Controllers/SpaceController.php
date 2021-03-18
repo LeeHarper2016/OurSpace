@@ -69,7 +69,7 @@ class SpaceController extends Controller
     {
         $spaces = Space::all();
 
-        return view('spaces.show_public')->with(['spaces' => $spaces]);
+        return view('spaces.list')->with(['spaces' => $spaces]);
     }
 
     /**
