@@ -20,7 +20,7 @@ class Space extends Model
 
     /********************************************************************
      *
-     * Function: User.spaces()
+     * Function: Space.users()
      * Purpose: Retrieve a collection of all users that are in the space.
      * Precondition: N/A.
      * Posctondition: N/A.
@@ -28,7 +28,7 @@ class Space extends Model
      * @return BelongsToMany The collection of users in the space.
      *
      *******************************************************************/
-    public function spaces() {
+    public function users() {
         return $this->belongsToMany(User::class, 'user_in_spaces')
             ->withTimestamps();
     }
