@@ -170,7 +170,9 @@ class SpaceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $space = Space::find($id)->first();
+
+        return view('spaces.update')->with(['space' => $space]);
     }
 
     /**
