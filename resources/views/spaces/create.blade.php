@@ -12,7 +12,7 @@
                 <input type="text" name="name" />
             </div>
             <div class="flex flex-col">
-                <label for="description">description:</label>
+                <label for="description">Description:</label>
                 <textarea rows="10" cols="30" name="description"></textarea>
             </div>
             <div class="flex flex-col">
