@@ -178,13 +178,41 @@ class SpaceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param Request $request
+     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $validatedData = $this->validateFormData($request);
+
+        $iconImagePath = 'public/images/space_icons/';
+        $bannerImagePath = 'public/images/banner_images/';
+
+        $space = Space::find($id)->first();
+
+        if (isset($validatedData['icon_picture'])) {
+            $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
+        } else {
+            $finalIconPath = $space->icon_picture_path;
+        }
+
+        if (isset($validatedData['banner_picture'])) {
+            $bannerIconPath = $this->uploadImage(bannerImagePath, $validatedData['banner_picture']);
+        } else {
+            $bannerIconPath = $space->banner_picture_path;
+        }
+
+        $space->fill([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'icon_picture_path' => $finalIconPath,
+            'banner_picture_path' => $finalBannerPath
+        ]);
+
+        $space->save();
+
+        return redirect('/')->with(['status' => 'success']);
     }
 
     /**
