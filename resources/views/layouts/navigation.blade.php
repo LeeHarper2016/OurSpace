@@ -5,19 +5,13 @@
             <div class="p-5 bg-purple-700 rounded-lg min-h-52 text-left border-2 border-black">
                 <h2 class="text-lg mb-5">Your Spaces</h2>
                 <ul class="space-y-2.5">
-                @if (count(auth()->user()->spaces) > 0)
-                    @foreach(auth()->user()->spaces as $space)
+                    @if (count(auth()->user()->spaces) > 0)
+                        @each('spaces.card', auth()->user()->spaces, 'space')
+                    @else
                         <li>
-                            <img src="{{ asset($space->icon_picture_path) }}" width="32" height="32"
-                                 class="inline-block mr-2 rounded-2xl" />
-                            <span>{{ $space->name }}</span>
+                            <span>You are currently not associated with any space.</span>
                         </li>
-                    @endforeach
-                @else
-                    <li>
-                        <span>You are currently not associated with any space.</span>
-                    </li>
-                @endif
+                    @endif
                     <li>
                         <a href="{{ url('/spaces/create') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
@@ -40,6 +34,21 @@
                     </li>
                 </ul>
             </div>
+
+            @if(isset($space))
+                <div class="p-5 bg-purple-700 rounded-lg min-h-52 text-left border-2 border-black">
+                    <h2 class="text-lg mb-5">Space Options</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ route('spaces.edit', ['space' => $space->id]) }}">Update Space</a>
+                        </li>
+                        <li>
+                            Delete Space
+                        </li>
+                    </ul>
+                </div>
+            @endif
+
             <a href="{{ url('/logout') }}" class="p-3 bg-purple-700 hover:bg-purple-600 duration-200 border-2
                 border-black rounded-md">
                 Log out
