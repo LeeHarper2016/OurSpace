@@ -43,7 +43,11 @@
                             <a href="{{ route('spaces.edit', ['space' => $space->id]) }}">Update Space</a>
                         </li>
                         <li>
-                            Delete Space
+                            <form method="post" action="{{ route('spaces.destroy', ['space' => $space->id]) }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit">Delete Space</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
