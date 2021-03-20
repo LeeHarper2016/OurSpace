@@ -220,13 +220,36 @@ class SpaceController extends Controller
         return redirect('/')->with(['status' => 'success']);
     }
 
-    /**
-     * Remove the specified resource from storage.
+    /********************************************************************************
      *
-     * @param  int  $id
-     * @return Response
-     */
+     * Function: SpaceController.destroy().
+     * Purpose: Remove the specified resource from storage.
+     * Precondition: The space exists within the database.
+     * Postcondition: The space is removed from the database, and any
+     *                files associated with it are deleted.
+     *
+     * @param  int  $id ID of the space to be deleted.
+     * @return Response Redirection to the homepage.
+     *
+     *******************************************************************************/
     public function destroy($id) {
-        //
+        $space = Space::find($id);
+
+        if (isset($space)) {
+            if (Storage::exists($space->icon_file_path)) {
+                Storage::delete($space->icon_file_path);
+            }
+            if (Storage::exists($space->banner_file_path)) {
+                Storage::delete($space->banner_file_path);
+            }
+
+            $space->delete();
+
+            return redirect('/')->with(['status' => 'success']);
+        } else {
+            return redirect()->back()
+                ->withErrors(['There is no space with that specified ID.']);
+        }
+
     }
 }
