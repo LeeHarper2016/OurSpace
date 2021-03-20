@@ -178,7 +178,12 @@ class SpaceController extends Controller
     public function edit($id) {
         $space = Space::find($id);
 
-        return view('spaces.update')->with(['space' => $space]);
+        if (isset($space)) {
+            return view('spaces.update')->with(['space' => $space]);
+        } else {
+            return redirect()->back()->withErrors(['There is no space with the ID supplied.']);
+        }
+
     }
 
     /**
