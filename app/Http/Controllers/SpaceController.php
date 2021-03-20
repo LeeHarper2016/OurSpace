@@ -181,7 +181,7 @@ class SpaceController extends Controller
         if (isset($space)) {
             return view('spaces.update')->with(['space' => $space]);
         } else {
-            return redirect()->back()->withErrors(['There is no space with the ID supplied.']);
+            return redirect('/')->withErrors(['There is no space with the ID supplied.']);
         }
 
     }
