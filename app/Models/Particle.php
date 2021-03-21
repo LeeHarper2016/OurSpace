@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Particle extends Model
 {
@@ -23,12 +23,11 @@ class Particle extends Model
      * Precondition: N/A.
      * Posctondition: N/A.
      *
-     * @return BelongsToMany The user that posted the space.
+     * @return BelongsTo The user that posted the space.
      *
      *******************************************************************/
     public function user() {
-        return $this->belongsTo(User::class)
-            ->withTimestamps();
+        return $this->belongsTo(User::class);
     }
 
     /********************************************************************
@@ -38,11 +37,10 @@ class Particle extends Model
      * Precondition: N/A.
      * Posctondition: N/A.
      *
-     * @return BelongsToMany The space that the particle was posted to.
+     * @return BelongsTo The space that the particle was posted to.
      *
      *******************************************************************/
     public function space() {
-        return $this->belongsTo(Space::class)
-            ->withTimestamps();
+        return $this->belongsTo(Space::class);
     }
 }
