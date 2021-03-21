@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,5 +32,20 @@ class Space extends Model
     public function users() {
         return $this->belongsToMany(User::class, 'user_in_spaces')
             ->withTimestamps();
+    }
+
+    /********************************************************************
+     *
+     * Function: Space.particles()
+     * Purpose: Retrieve a collection of all particles that were posted
+     *          to the space.
+     * Precondition: N/A.
+     * Posctondition: N/A.
+     *
+     * @return hasMany The collection of particles in the space.
+     *
+     *******************************************************************/
+    public function particles() {
+        return $this->hasMany(Particle::class);
     }
 }
