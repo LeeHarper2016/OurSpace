@@ -10,6 +10,12 @@ class Particle extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'space_id',
+        'body'
+    ];
+
     /********************************************************************
      *
      * Function: Particle.user()
