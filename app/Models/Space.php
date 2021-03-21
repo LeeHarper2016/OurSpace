@@ -46,6 +46,7 @@ class Space extends Model
      *
      *******************************************************************/
     public function particles() {
-        return $this->hasMany(Particle::class);
+        return $this->hasMany(Particle::class)
+            ->orderBy('created_at', 'desc');
     }
 }
