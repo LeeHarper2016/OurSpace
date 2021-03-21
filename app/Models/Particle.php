@@ -10,7 +10,20 @@ class Particle extends Model
 {
     use HasFactory;
 
-
+    /********************************************************************
+     *
+     * Function: Particle.user()
+     * Purpose: Retrieve the user that posted the particle.
+     * Precondition: N/A.
+     * Posctondition: N/A.
+     *
+     * @return BelongsToMany The user that posted the space.
+     *
+     *******************************************************************/
+    public function user() {
+        return $this->belongsTo(User::class)
+            ->withTimestamps();
+    }
 
     /********************************************************************
      *
