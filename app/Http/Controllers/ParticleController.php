@@ -23,7 +23,7 @@ class ParticleController extends Controller
      ************************************************************************/
     public function store(int $spaceId, Request $request) {
         $validatedData = $request->validate([
-            'body' => ['required', 'text']
+            'body' => ['required']
         ]);
 
         $particle = new Particle;
