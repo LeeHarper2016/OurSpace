@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParticleController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SpaceController;
@@ -25,6 +26,8 @@ Route::get('/login', [LoginController::class, 'view']);
 Route::get('/logout', [LoginController::class, 'logOutUser']);
 
 Route::resource('spaces', SpaceController::class);
+Route::post('/spaces/{space}/particles', [ParticleController::class, 'store'])
+    ->name('particles.store');
 
 Route::post('/users', [RegisterController::class, 'registerUser']);
 Route::post('/users/login', [LoginController::class, 'loginUser']);
