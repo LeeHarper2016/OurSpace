@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\ValidationException;
 
+use App\Models\Particle;
 use App\Models\Space;
 use App\Models\UserInSpace;
 use Illuminate\Http\Request;
@@ -27,8 +27,7 @@ class SpaceController extends Controller
      * @return array Array of the validated form view.
      * @throws ValidationException Exception thrown when the data is not successfully
      *                             validated.
-     ******************************************************************************
-     */
+     *******************************************************************************/
     private function validateFormData(Request $request, bool $requireImages) {
         if ($requireImages) {
             return $this->validate($request, [
@@ -159,14 +158,22 @@ class SpaceController extends Controller
         return redirect('/')->with(['status' => 'success']);
     }
 
-    /**
-     * Display the specified resource.
+
+    /***************************************************************************
      *
-     * @param  int  $id
-     * @return Response
-     */
+     * Function: SpaceController.show()
+     * Purpose: Displays a space, as well as its particles, to the user.
+     * Precondition: N/A.
+     * Post-condition: N/A.
+     *
+     * @param $id int The ID of the space being accessed.
+     * @return View The view containing the particles of the space.
+     *
+     **************************************************************************/
     public function show($id) {
-        //
+        $space = Space::find($id);
+
+        return view('spaces.home')->with(['space' => $space]);
     }
 
     /**
