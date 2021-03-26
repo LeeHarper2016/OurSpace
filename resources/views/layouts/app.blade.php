@@ -20,16 +20,21 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+        <!-- Scripts -->
+        <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="antialiased flex">
-        <div class="inline-block w-1/4 h-screen bg-purple-400 border-r-2 border-purple-900">
-             @include('layouts.navigation')
-        </div>
-        <div class="inline-block w-2/4 h-screen bg-purple-300">
-            @yield('content')
-        </div>
-        <div class="inline-block w-1/4 h-screen bg-purple-400 border-l-2 border-purple-900">
-            @yield('feature')
+    <body class="antialiased">
+        <div id="app" class="flex">
+            <div class="inline-block w-1/4 h-screen bg-purple-400 border-r-2 border-purple-900">
+                 @include('layouts.navigation')
+            </div>
+            <div class="inline-block w-2/4 h-screen bg-purple-300">
+                @yield('content')
+            </div>
+            <div class="inline-block w-1/4 h-screen bg-purple-400 border-l-2 border-purple-900">
+                @yield('feature')
+            </div>
         </div>
     </body>
 </html>
