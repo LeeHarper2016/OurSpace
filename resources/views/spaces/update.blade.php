@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @include('errors.summary');
     <div class="flex flex-col items-center mt-10">
         <img src="{{ asset($space->icon_picture_path) }}" width="200" height="200" class="rounded-full mb-5" />
         <h1 class="text-4xl font-bold">Update {{ $space->name }}</h1>
