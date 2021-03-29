@@ -13,10 +13,5 @@ import ErrorMessage from "./ErrorMessage";
 export default {
     props: ['errors'],
     components: {ErrorMessage},
-    data() {
-        return {
-            message: 'There was an error.'
-        }
-    }
 }
 </script>
