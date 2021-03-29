@@ -31,7 +31,7 @@
             </div>
             <div class="inline-block w-2/4 h-screen bg-purple-300">
                 @if ($errors->any())
-                    <error-list :errors='@json($errors->all())'></error-list>
+                    <error-message-list :errors='@json($errors->all())'></error-message-list>
                 @endif
                 @yield('content')
             </div>
