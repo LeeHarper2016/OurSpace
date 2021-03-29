@@ -1,6 +1,6 @@
 <template>
     <div class="relative pointer-events-none w-full">
-        <div v-for="particle in this.particles">
+        <div v-for="particle in this.particles" :key="particle.id">
             <h1>{{ particle.user.name }}</h1>
             <p>{{ particle.body }}</p>
             <hr />
