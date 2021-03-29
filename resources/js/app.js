@@ -1,8 +1,11 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+
 import ErrorList from "./classes/ErrorList";
+
 import ErrorMessageList from "./components/error/ErrorMessageList";
+import ParticleList from "./components/particle/ParticleList";
 
 new Vue({
     el: '#app',
@@ -15,7 +18,8 @@ new Vue({
         }
     },
     components: {
-        ErrorMessageList
+        ErrorMessageList,
+        ParticleList
     },
     methods: {
         addError(message) {
