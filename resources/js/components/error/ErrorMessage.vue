@@ -1,8 +1,10 @@
 <template>
     <transition name="fade">
-        <div id="test" v-if="isVisible" class="bg-red-200 h-12 rounded-xl w-2/3 p-3 mr-auto ml-auto mt-3 pointer-events-auto">
+        <div v-if="isVisible"
+             class="bg-red-200 h-12 rounded-xl w-2/3 p-3 mr-auto ml-auto mt-3 pointer-events-auto">
             <slot></slot>
-            <button @click="toggleVisibility" class="underline float-right">
+            <button @click="closeError"
+                    class="underline float-right">
                 close
             </button>
         </div>
@@ -11,14 +13,16 @@
 
 <script>
   export default {
+      props: ['id'],
       data() {
           return {
               isVisible: true
           }
       },
       methods: {
-          toggleVisibility() {
+          closeError() {
               this.isVisible = false;
+              this.$emit('delete', this.id);
           }
       }
 
@@ -33,5 +37,4 @@
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
-
 </style>
