@@ -9,7 +9,9 @@ new Vue({
     data: {
         errorList: null
     },
-    provide: [this.errorList],
+    provide: {
+        errorList: this.errorList
+    },
     components: {
         ErrorMessageList
     },
