@@ -11,6 +11,7 @@
 
 export default {
     props: ['space'],
+    inject: ['errorList'],
     data() {
         return {
             body: ''
@@ -19,6 +20,9 @@ export default {
     methods: {
         onSubmit() {
             axios.post("/spaces/" + this.space +  "/particles", { body: this.body })
+                .catch((error) => {
+                    this.errorList.addError(error.message)
+                });
         }
     }
 }
