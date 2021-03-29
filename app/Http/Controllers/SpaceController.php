@@ -157,14 +157,19 @@ class SpaceController extends Controller
      * Precondition: N/A.
      * Post-condition: N/A.
      *
+     * TODO: Decouple particles from spaces if possible.
+     *
      * @param $id int The ID of the space being accessed.
      * @return View The view containing the particles of the space.
      *
      **************************************************************************/
     public function show($id) {
         $space = Space::find($id);
+        $particles = Particle::with('user')
+            ->where('space_id', $id)
+            ->get();
 
-        return view('spaces.home')->with(['space' => $space]);
+        return view('spaces.home')->with(['space' => $space, 'particles' => $particles]);
     }
 
     /**
