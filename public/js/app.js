@@ -1926,9 +1926,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 new vue__WEBPACK_IMPORTED_MODULE_2__.default({
   el: '#app',
   data: {
-    errorList: null
+    errorList: new _classes_ErrorList__WEBPACK_IMPORTED_MODULE_0__.default()
   },
-  provide: [undefined.errorList],
+  provide: function provide() {
+    return {
+      errorList: this.errorList
+    };
+  },
   components: {
     ErrorMessageList: _components_error_ErrorMessageList__WEBPACK_IMPORTED_MODULE_1__.default
   },
@@ -1936,9 +1940,6 @@ new vue__WEBPACK_IMPORTED_MODULE_2__.default({
     addError: function addError(message) {
       this.errorList.addError(message);
     }
-  },
-  mounted: function mounted() {
-    this.errorList = new _classes_ErrorList__WEBPACK_IMPORTED_MODULE_0__.default();
   }
 });
 
@@ -2052,7 +2053,7 @@ var ErrorList = /*#__PURE__*/function () {
   }, {
     key: "addError",
     value: function addError(message) {
-      this.errors.append({
+      this.errors.push({
         id: this.size(),
         message: message
       });
@@ -19673,7 +19674,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "button",
-            { staticClass: "underline", on: { click: _vm.toggleVisibility } },
+            {
+              staticClass: "underline float-right",
+              on: { click: _vm.toggleVisibility }
+            },
             [_vm._v("\n        close\n    ")]
           )
         ],
@@ -19707,7 +19711,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "relative pointer-events-none w-full" },
-    _vm._l(this.errors, function(error) {
+    _vm._l(this.errorList.getErrors(), function(error) {
       return _c("error-message", { key: error.id }, [
         _vm._v("\n        " + _vm._s(error.message) + "\n    ")
       ])
