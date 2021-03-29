@@ -5,6 +5,7 @@ import Vue from 'vue';
 import ErrorList from "./classes/ErrorList";
 
 import ErrorMessageList from "./components/error/ErrorMessageList";
+import ParticleForm from "./components/particle/ParticleForm";
 import ParticleList from "./components/particle/ParticleList";
 
 new Vue({
@@ -19,7 +20,8 @@ new Vue({
     },
     components: {
         ErrorMessageList,
-        ParticleList
+        ParticleList,
+        ParticleForm
     },
     methods: {
         addError(message) {
