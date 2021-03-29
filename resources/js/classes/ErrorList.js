@@ -61,14 +61,14 @@ export default class ErrorList {
 
     /*********************************************************************
      *
-     * Function Name: ErrorList.deleteError(message).
+     * Function Name: ErrorList.deleteError(id).
      * Purpose: Removes an error from the errors array if it exists.
-     * Precondition: The error message must exist within the errors array.
+     * Precondition: N/A.
      * Postcondition: The error message is removed from the array.
      *
      ********************************************************************/
-    deleteError(message) {
-        this.errors = this.errors.filter((error) => error.message != message);
+    deleteError(id) {
+        this.errors = this.errors.filter((error) => error.id !== id);
     }
 
 }
