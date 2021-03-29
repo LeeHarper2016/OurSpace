@@ -7,7 +7,7 @@ import ErrorMessageList from "./components/error/ErrorMessageList";
 new Vue({
     el: '#app',
     data: {
-        errorList: null
+        errorList: new ErrorList()
     },
     provide() {
         return {
@@ -21,8 +21,5 @@ new Vue({
         addError(message) {
             this.errorList.addError(message)
         }
-    },
-    mounted() {
-        this.errorList = new ErrorList();
     }
 })
