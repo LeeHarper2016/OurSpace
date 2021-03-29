@@ -105,15 +105,6 @@ class SpaceController extends Controller
     }
 
     /**
-     * Display a private listing of the resource.
-     *
-     * @return Response
-     */
-    public function privateIndex() {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return View
