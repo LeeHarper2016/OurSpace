@@ -49,9 +49,9 @@ export default class ErrorList {
      *
      ********************************************************************/
     addError(message) {
-        let errorExists = this.errors.filter((error) => error.message === message);
+        let errorExists = this.errors.findIndex((error) => error.message === message);
 
-        if (errorExists === false) {
+        if (errorExists === -1) {
             this.errors.push({
                 id: this.size(),
                 message: message
