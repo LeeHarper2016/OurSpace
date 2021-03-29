@@ -30,9 +30,7 @@
                  @include('layouts.navigation')
             </div>
             <div class="inline-block w-2/4 h-screen bg-purple-300">
-                @if ($errors->any())
-                    <error-message-list :errors='@json($errors->all())'></error-message-list>
-                @endif
+                <error-message-list :errors='@json($errors->all())'></error-message-list>
                 @yield('content')
             </div>
             <div class="inline-block w-1/4 h-screen bg-purple-400 border-l-2 border-purple-900">
