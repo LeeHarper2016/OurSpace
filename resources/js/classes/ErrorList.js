@@ -52,7 +52,10 @@ export default class ErrorList {
      *
      ********************************************************************/
     addError(message) {
-        this.#errors.append(message);
+        this.#errors.append({
+            id: this.size(),
+            message: message
+        });
     }
 
     /*********************************************************************
