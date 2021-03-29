@@ -49,10 +49,14 @@ export default class ErrorList {
      *
      ********************************************************************/
     addError(message) {
-        this.errors.push({
-            id: this.size(),
-            message: message
-        });
+        let errorExists = this.errors.filter((error) => error.message === message);
+
+        if (errorExists === false) {
+            this.errors.push({
+                id: this.size(),
+                message: message
+            });
+        }
     }
 
     /*********************************************************************
@@ -64,7 +68,7 @@ export default class ErrorList {
      *
      ********************************************************************/
     deleteError(message) {
-        this.errors = this.errors.filter((error) => error != message);
+        this.errors = this.errors.filter((error) => error.message != message);
     }
 
 }
