@@ -16,4 +16,16 @@ export default class ErrorList {
         this.#errors = [];
     }
 
+    /**********************************************************************
+     *
+     * Function Name: ErrorList.addError().
+     * Purpose: Adds a new error message to the array of error messages.
+     * Precondition: N/A.
+     * Postcondition: A new error message is added to the #errors array.
+     *
+     ********************************************************************/
+    addError(message) {
+        this.#errors.append(message);
+    }
+
 }
