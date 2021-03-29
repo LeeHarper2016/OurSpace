@@ -1907,6 +1907,49 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleForm.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleForm.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['space'],
+  inject: ['errorList'],
+  data: function data() {
+    return {
+      body: ''
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      axios.post("/spaces/" + this.space + "/particles", {
+        body: this.body
+      })["catch"](function (error) {
+        _this.errorList.addError(error.message);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleList.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleList.vue?vue&type=script&lang=js& ***!
@@ -1942,17 +1985,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var _classes_ErrorList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./classes/ErrorList */ "./resources/js/classes/ErrorList.js");
 /* harmony import */ var _components_error_ErrorMessageList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/error/ErrorMessageList */ "./resources/js/components/error/ErrorMessageList.vue");
-/* harmony import */ var _components_particle_ParticleList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/particle/ParticleList */ "./resources/js/components/particle/ParticleList.vue");
+/* harmony import */ var _components_particle_ParticleForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/particle/ParticleForm */ "./resources/js/components/particle/ParticleForm.vue");
+/* harmony import */ var _components_particle_ParticleList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/particle/ParticleList */ "./resources/js/components/particle/ParticleList.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 
 
-new vue__WEBPACK_IMPORTED_MODULE_3__.default({
+
+new vue__WEBPACK_IMPORTED_MODULE_4__.default({
   el: '#app',
   data: {
     errorList: new _classes_ErrorList__WEBPACK_IMPORTED_MODULE_0__.default()
@@ -1964,7 +2009,8 @@ new vue__WEBPACK_IMPORTED_MODULE_3__.default({
   },
   components: {
     ErrorMessageList: _components_error_ErrorMessageList__WEBPACK_IMPORTED_MODULE_1__.default,
-    ParticleList: _components_particle_ParticleList__WEBPACK_IMPORTED_MODULE_2__.default
+    ParticleList: _components_particle_ParticleList__WEBPACK_IMPORTED_MODULE_3__.default,
+    ParticleForm: _components_particle_ParticleForm__WEBPACK_IMPORTED_MODULE_2__.default
   },
   methods: {
     addError: function addError(message) {
@@ -2083,10 +2129,16 @@ var ErrorList = /*#__PURE__*/function () {
   }, {
     key: "addError",
     value: function addError(message) {
-      this.errors.push({
-        id: this.size(),
-        message: message
+      var errorExists = this.errors.findIndex(function (error) {
+        return error.message === message;
       });
+
+      if (errorExists === -1) {
+        this.errors.push({
+          id: this.size(),
+          message: message
+        });
+      }
     }
     /*********************************************************************
      *
@@ -2101,7 +2153,7 @@ var ErrorList = /*#__PURE__*/function () {
     key: "deleteError",
     value: function deleteError(message) {
       this.errors = this.errors.filter(function (error) {
-        return error != message;
+        return error.message != message;
       });
     }
   }]);
@@ -19610,6 +19662,45 @@ component.options.__file = "resources/js/components/error/ErrorMessageList.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/particle/ParticleForm.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/particle/ParticleForm.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _ParticleForm_vue_vue_type_template_id_1f6dea90___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ParticleForm.vue?vue&type=template&id=1f6dea90& */ "./resources/js/components/particle/ParticleForm.vue?vue&type=template&id=1f6dea90&");
+/* harmony import */ var _ParticleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ParticleForm.vue?vue&type=script&lang=js& */ "./resources/js/components/particle/ParticleForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _ParticleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _ParticleForm_vue_vue_type_template_id_1f6dea90___WEBPACK_IMPORTED_MODULE_0__.render,
+  _ParticleForm_vue_vue_type_template_id_1f6dea90___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/particle/ParticleForm.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/particle/ParticleList.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/particle/ParticleList.vue ***!
@@ -19681,6 +19772,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/particle/ParticleForm.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/particle/ParticleForm.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParticleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParticleForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleForm.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ParticleForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/particle/ParticleList.vue?vue&type=script&lang=js&":
 /*!************************************************************************************!*\
   !*** ./resources/js/components/particle/ParticleList.vue?vue&type=script&lang=js& ***!
@@ -19727,6 +19834,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorMessageList_vue_vue_type_template_id_331d6d22___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ErrorMessageList_vue_vue_type_template_id_331d6d22___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ErrorMessageList.vue?vue&type=template&id=331d6d22& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/error/ErrorMessageList.vue?vue&type=template&id=331d6d22&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/particle/ParticleForm.vue?vue&type=template&id=1f6dea90&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/particle/ParticleForm.vue?vue&type=template&id=1f6dea90& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParticleForm_vue_vue_type_template_id_1f6dea90___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParticleForm_vue_vue_type_template_id_1f6dea90___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ParticleForm_vue_vue_type_template_id_1f6dea90___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ParticleForm.vue?vue&type=template&id=1f6dea90& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleForm.vue?vue&type=template&id=1f6dea90&");
 
 
 /***/ }),
@@ -19828,6 +19952,76 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleForm.vue?vue&type=template&id=1f6dea90&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleForm.vue?vue&type=template&id=1f6dea90& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "p-5" }, [
+    _c(
+      "form",
+      {
+        staticClass: "space-y-3 mr-auto ml-auto",
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.onSubmit($event)
+          }
+        }
+      },
+      [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.body,
+              expression: "body"
+            }
+          ],
+          staticClass: "block border border-black w-3/4 p-2.5",
+          attrs: { rows: "5", name: "body" },
+          domProps: { value: _vm.body },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.body = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "p-3 w-20 bg-indigo-300 rounded-lg",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("Post")]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleList.vue?vue&type=template&id=24423192&":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/particle/ParticleList.vue?vue&type=template&id=24423192& ***!
@@ -19848,7 +20042,7 @@ var render = function() {
     "div",
     { staticClass: "relative pointer-events-none w-full" },
     _vm._l(this.particles, function(particle) {
-      return _c("div", [
+      return _c("div", { key: particle.id }, [
         _c("h1", [_vm._v(_vm._s(particle.user.name))]),
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(particle.body))]),
