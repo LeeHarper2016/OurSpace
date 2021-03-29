@@ -1,6 +1,6 @@
 <template>
     <div class="relative pointer-events-none w-full">
-        <error-message v-for="error in this.errorList.getErrors()" v-bind:key="error.id">
+        <error-message v-for="error in this.errorList.getErrors()" :key="error.id">
             {{ error.message }}
         </error-message>
     </div>
@@ -8,7 +8,6 @@
 
 <script>
 import ErrorMessage from "./ErrorMessage";
-
 
 export default {
     props: ['errors'],
