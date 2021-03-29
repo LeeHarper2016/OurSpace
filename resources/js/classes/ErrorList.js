@@ -49,7 +49,7 @@ export default class ErrorList {
      *
      ********************************************************************/
     addError(message) {
-        this.errors.append({
+        this.errors.push({
             id: this.size(),
             message: message
         });
