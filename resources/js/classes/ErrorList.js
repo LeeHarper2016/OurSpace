@@ -30,6 +30,21 @@ export default class ErrorList {
 
     /**********************************************************************
      *
+     * Function Name: ErrorList.size().
+     * Purpose: Returns the number of error messages currently residing in
+     *          the #errors field.
+     * Precondition: N/A.
+     * PostCondition: N/A.
+     *
+     * @returns The amount of errors located within the #errors field.
+     *
+     *********************************************************************/
+    size() {
+        return this.#errors.length;
+    }
+
+    /**********************************************************************
+     *
      * Function Name: ErrorList.addError().
      * Purpose: Adds a new error message to the array of error messages.
      * Precondition: N/A.
