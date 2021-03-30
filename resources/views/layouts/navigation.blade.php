@@ -1,8 +1,14 @@
 <div>
     @auth
-        <div class="flex space-x-5 w-3/4 text-center text-white font-bold p-5">
-            <span class="text-black font-bold">Welcome back, {{ auth()->user()->name  }}</span>
-
+        <div class="flex justify-between w-full text-center text-white font-bold p-5">
+            <div class="space-x-5">
+                <a href="{{ url('/') }}" class="text-black font-bold">{{ env('APP_NAME') }}</a>
+            </div>
+            <div class="space-x-5">
+                <span class="text-black font-bold">Your Spaces</span>
+                <span class="text-black font-bold">Space Options</span>
+                <span class="text-black font-bold">{{ auth()->user()->name  }}</span>
+            </div>
         </div>
     @endauth
     @guest
