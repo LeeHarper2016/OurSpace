@@ -1,6 +1,6 @@
 <div>
     @auth
-        <div class="flex flex-col space-y-5 w-3/4 text-center text-white font-bold mr-auto ml-auto mt-5">
+        <div class="flex space-y-5 w-3/4 text-center text-white font-bold mr-auto ml-auto mt-5">
             <span class="text-black font-bold">Welcome back, {{ auth()->user()->name  }}</span>
             <div class="p-5 bg-purple-700 rounded-lg min-h-52 text-left border-2 border-black">
                 <h2 class="text-lg mb-5">Your Spaces</h2>
@@ -60,7 +60,7 @@
         </div>
     @endauth
     @guest
-        <div class="flex flex-col space-y-5 w-1/2 text-center text-white font-bold mr-auto ml-auto mt-5">
+        <div class="float-right space-x-5 w-1/2 text-center text-white font-bold mr-auto ml-auto mt-5">
             <a href="{{ url('/register') }}" class="p-3 bg-purple-700 hover:bg-purple-600 duration-200 border-2
                 border-black rounded-md">
                 Register
