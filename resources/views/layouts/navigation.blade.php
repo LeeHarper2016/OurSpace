@@ -1,8 +1,8 @@
 <div>
     @auth
-        <div class="flex space-x-5 w-3/4 text-center text-white font-bold mr-auto ml-auto mt-5">
+        <div class="flex space-x-5 w-3/4 text-center text-white font-bold p-5">
             <span class="text-black font-bold">Welcome back, {{ auth()->user()->name  }}</span>
-            
+
         </div>
     @endauth
     @guest
