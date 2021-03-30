@@ -19,7 +19,6 @@
         "vue-loader": "^15.9.5"
     },
     "dependencies": {
-        "postcss-import": "^14.0.0",
         "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
     }
