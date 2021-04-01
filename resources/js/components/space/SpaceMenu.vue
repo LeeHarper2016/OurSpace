@@ -4,7 +4,8 @@
                v-model="userSearch"
                placeholder="Search Spaces"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
-        <ul>
+        <ul v-if="userIsSearching"
+            class="block absolute bg-white rounded-md transform translate-y-10 p-2 border border-t-none">>
             <li v-for="space in searchList"
                 v-text="space.name">
             </li>
@@ -30,9 +31,7 @@ export default {
         }
     },
     methods: {
-        removeError(id) {
-            this.errorList.deleteError(id);
-        }
+        
     },
 }
 </script>
