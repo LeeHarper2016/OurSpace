@@ -3,10 +3,10 @@
         <input type="text"
                placeholder="Search Spaces"
                v-model="userSearch"
-               @change="onInputChange"
+               @keyup="onInputChange"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
         <ul v-if="userIsSearching"
-            class="block absolute bg-white rounded-md transform translate-y-10 p-2 border border-t-none">>
+            class="block text-black absolute w-64 bg-white rounded-md p-2 border border-t-none">
             <li v-for="space in searchList"
                 v-text="space.name">
             </li>
@@ -27,7 +27,11 @@ export default {
     computed: {
         searchList() {
             return this.spaces.filter((space) => {
-                return 'testing';
+                if (space.name.search(this.userSearch) !== -1) {
+                    return true;
+                } else {
+                    return false;
+                }
             });
         }
     },
