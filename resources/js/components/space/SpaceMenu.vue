@@ -31,7 +31,13 @@ export default {
         }
     },
     methods: {
-        
+        onInputChange() {
+            if (this.userSearch === '') {
+                this.userIsSearching = false;
+            } else {
+                this.userIsSearching = true;
+            }
+        }
     },
 }
 </script>
