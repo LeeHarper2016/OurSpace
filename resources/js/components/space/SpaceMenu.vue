@@ -8,9 +8,14 @@
                class="text-black w-64 border p-1 pl-3 rounded-md" />
         <transition name="slide">
             <ul v-if="userIsSearching"
-                class="block text-black absolute w-64 bg-white rounded-md p-2 border border-t-none">
-                <li v-for="space in searchList"
-                    v-text="space.name">
+                class="block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none">
+                <li v-for="space in searchList">
+                    <img :src="space.icon_picture_path"
+                        width="32"
+                        height="32"
+                        class="rounded-full inline" />
+                    <span v-text="space.name"
+                        class="inline"></span>
                 </li>
             </ul>
         </transition>
