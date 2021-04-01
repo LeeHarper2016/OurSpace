@@ -12,12 +12,14 @@
                 class="block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none"
                 v-if="userIsSearching">
                 <li v-for="space in searchList" :key="space.id">
-                    <img :src="space.icon_picture_path"
-                        width="32"
-                        height="32"
-                        class="rounded-full inline" />
-                    <span v-text="space.name"
-                        class="inline"></span>
+                    <a :href="spaceUrl(space.id)">
+                        <img :src="space.icon_picture_path"
+                            width="32"
+                            height="32"
+                            class="rounded-full inline" />
+                        <span v-text="space.name"
+                            class="inline"></span>
+                    </a>
                 </li>
             </transition-group>
         </transition>
@@ -72,6 +74,9 @@ export default {
             if (this.userSearch !== '') {
                 this.userIsSearching = true;
             }
+        },
+        spaceUrl(id) {
+            return '/spaces/' + id;
         }
     },
 }
