@@ -6,14 +6,33 @@
                @keydown="checkIfClear"
                @keyup="onUserSearch"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
-        <ul v-if="userIsSearching"
-            class="block text-black absolute w-64 bg-white rounded-md p-2 border border-t-none">
-            <li v-for="space in searchList"
-                v-text="space.name">
-            </li>
-        </ul>
+        <transition name="slide">
+            <ul v-if="userIsSearching"
+                class="block text-black absolute w-64 bg-white rounded-md p-2 border border-t-none">
+                <li v-for="space in searchList"
+                    v-text="space.name">
+                </li>
+            </ul>
+        </transition>
     </div>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.25s ease;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+.slide-enter-active, .slide-leave-active {
+    transition: all 0.25s ease;
+}
+.slide-enter, .slide-leave-to {
+    transform: translateY(-1rem);
+    opacity: 0;
+}
+
+</style>
 
 <script>
 
