@@ -2043,6 +2043,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['spaces'],
   data: function data() {
@@ -20771,7 +20773,7 @@ var render = function() {
             expression: "userSearch"
           }
         ],
-        staticClass: "text-black w-64 border p-1 pl-3 rounded-md z-1",
+        staticClass: "text-black w-64 border p-1 pl-3 rounded-md",
         attrs: { type: "text", placeholder: "Search Spaces" },
         domProps: { value: _vm.userSearch },
         on: {
@@ -20786,35 +20788,41 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "slide" } }, [
-        _vm.userIsSearching
-          ? _c(
-              "ul",
-              {
-                staticClass:
-                  "block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none z-3"
-              },
-              _vm._l(_vm.searchList, function(space) {
-                return _c("li", [
-                  _c("img", {
-                    staticClass: "rounded-full inline",
-                    attrs: {
-                      src: space.icon_picture_path,
-                      width: "32",
-                      height: "32"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("span", {
-                    staticClass: "inline",
-                    domProps: { textContent: _vm._s(space.name) }
-                  })
-                ])
-              }),
-              0
-            )
-          : _vm._e()
-      ])
+      _c(
+        "transition",
+        { attrs: { name: "slide" } },
+        [
+          _vm.userIsSearching
+            ? _c(
+                "transition-group",
+                {
+                  staticClass:
+                    "block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none",
+                  attrs: { name: "fade", tag: "ul" }
+                },
+                _vm._l(_vm.searchList, function(space) {
+                  return _c("li", { key: space.id }, [
+                    _c("img", {
+                      staticClass: "rounded-full inline",
+                      attrs: {
+                        src: space.icon_picture_path,
+                        width: "32",
+                        height: "32"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "inline",
+                      domProps: { textContent: _vm._s(space.name) }
+                    })
+                  ])
+                }),
+                0
+              )
+            : _vm._e()
+        ],
+        1
+      )
     ],
     1
   )
