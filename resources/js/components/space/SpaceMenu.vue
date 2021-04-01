@@ -39,7 +39,7 @@ export default {
     methods: {
         checkIfClear() {
             if (this.userSearch === '') {
-                return false;
+                this.userIsSearching = false;
             }
         },
         onUserSearch() {
