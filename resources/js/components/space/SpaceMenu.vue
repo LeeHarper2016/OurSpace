@@ -1,8 +1,9 @@
 <template>
     <div>
         <input type="text"
-               v-model="userSearch"
                placeholder="Search Spaces"
+               v-model="userSearch"
+               @change="onInputChange"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
         <ul v-if="userIsSearching"
             class="block absolute bg-white rounded-md transform translate-y-10 p-2 border border-t-none">>
