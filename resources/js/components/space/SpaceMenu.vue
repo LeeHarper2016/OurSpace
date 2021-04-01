@@ -16,9 +16,11 @@
 
 export default {
     props: ['spaces'],
-    data: {
-        userIsSearching: false,
-        userSearch: ''
+    data() {
+        return {
+            userIsSearching: false,
+            userSearch: ''
+        }
     },
     computed: {
         searchList() {
