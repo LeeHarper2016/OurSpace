@@ -5,7 +5,7 @@
                 <a href="{{ url('/') }}" class="text-black font-bold">{{ env('APP_NAME') }}</a>
             </div>
             <div class="space-x-5">
-                <space-menu></space-menu>
+                <space-menu :spaces='@json(auth()->user()->spaces)'></space-menu>
                 <span class="text-black font-bold">Space Options</span>
                 <span class="text-black font-bold">{{ auth()->user()->name  }}</span>
             </div>
