@@ -3,7 +3,8 @@
         <input type="text"
                placeholder="Search Spaces"
                v-model="userSearch"
-               @keyup="onInputChange"
+               @keydown="checkIfClear"
+               @keyup="onUserSearch"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
         <ul v-if="userIsSearching"
             class="block text-black absolute w-64 bg-white rounded-md p-2 border border-t-none">
@@ -36,10 +37,13 @@ export default {
         }
     },
     methods: {
-        onInputChange() {
+        checkIfClear() {
             if (this.userSearch === '') {
-                this.userIsSearching = false;
-            } else {
+                return false;
+            }
+        },
+        onUserSearch() {
+            if (this.userSearch !== '') {
                 this.userIsSearching = true;
             }
         }
