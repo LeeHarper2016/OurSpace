@@ -7,9 +7,11 @@
                @keyup="onUserSearch"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
         <transition name="slide">
-            <ul v-if="userIsSearching"
-                class="block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none">
-                <li v-for="space in searchList">
+            <transition-group name="fade"
+                tag="ul"
+                class="block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none"
+                v-if="userIsSearching">
+                <li v-for="space in searchList" :key="space.id">
                     <img :src="space.icon_picture_path"
                         width="32"
                         height="32"
@@ -17,7 +19,7 @@
                     <span v-text="space.name"
                         class="inline"></span>
                 </li>
-            </ul>
+            </transition-group>
         </transition>
     </div>
 </template>
