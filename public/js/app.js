@@ -2045,6 +2045,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['spaces'],
   data: function data() {
@@ -2076,6 +2078,9 @@ __webpack_require__.r(__webpack_exports__);
       if (this.userSearch !== '') {
         this.userIsSearching = true;
       }
+    },
+    spaceUrl: function spaceUrl(id) {
+      return '/spaces/' + id;
     }
   }
 });
@@ -20802,19 +20807,21 @@ var render = function() {
                 },
                 _vm._l(_vm.searchList, function(space) {
                   return _c("li", { key: space.id }, [
-                    _c("img", {
-                      staticClass: "rounded-full inline",
-                      attrs: {
-                        src: space.icon_picture_path,
-                        width: "32",
-                        height: "32"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "inline",
-                      domProps: { textContent: _vm._s(space.name) }
-                    })
+                    _c("a", { attrs: { href: _vm.spaceUrl(space.id) } }, [
+                      _c("img", {
+                        staticClass: "rounded-full inline",
+                        attrs: {
+                          src: space.icon_picture_path,
+                          width: "32",
+                          height: "32"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "inline",
+                        domProps: { textContent: _vm._s(space.name) }
+                      })
+                    ])
                   ])
                 }),
                 0
