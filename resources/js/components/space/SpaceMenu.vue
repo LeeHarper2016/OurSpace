@@ -1,13 +1,15 @@
 <template>
-    <input type="text"
-           v-model="userSearch"
-           placeholder="Search Spaces"
-           class="text-black w-64 border p-1 pl-3 rounded-md" />
-    <ul>
-        <li v-for="space in searchList"
-            v-text="space.name">
-        </li>
-    </ul>
+    <div>
+        <input type="text"
+               v-model="userSearch"
+               placeholder="Search Spaces"
+               class="text-black w-64 border p-1 pl-3 rounded-md" />
+        <ul>
+            <li v-for="space in searchList"
+                v-text="space.name">
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
