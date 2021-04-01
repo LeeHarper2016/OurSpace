@@ -7,6 +7,7 @@ import ErrorList from "./classes/ErrorList";
 import ErrorMessageList from "./components/error/ErrorMessageList";
 import ParticleForm from "./components/particle/ParticleForm";
 import ParticleList from "./components/particle/ParticleList";
+import SpaceMenu from "./components/space/SpaceMenu";
 
 new Vue({
     el: '#app',
@@ -21,7 +22,8 @@ new Vue({
     components: {
         ErrorMessageList,
         ParticleList,
-        ParticleForm
+        ParticleForm,
+        SpaceMenu
     },
     methods: {
         addError(message) {
