@@ -6,6 +6,9 @@
             </div>
             <div class="flex space-x-5">
                 <space-menu :spaces='@json(auth()->user()->spaces)'></space-menu>
+                <navbar-dropdown-menu :items='[{name: "Edit Space", link: "/spaces/{{ space.id }}"}, {name: "Delete Space", link: "/spaces/{{ space.id }}/delete"}, ]'>
+                    <slot #nav-option>Space Options</slot>
+                </navbar-dropdown-menu>
                 <span class="text-black font-bold">Space Options</span>
                 <span class="text-black font-bold">{{ auth()->user()->name  }}</span>
             </div>
