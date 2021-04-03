@@ -2101,6 +2101,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['spaces'],
   data: function data() {
@@ -2400,7 +2401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-734b6421], .fade-leave-active[data-v-734b6421] {\r\n    transition: opacity 0.25s ease;\n}\n.fade-enter[data-v-734b6421], .fade-leave-to[data-v-734b6421] {\r\n    opacity: 0;\n}\n.slide-enter-active[data-v-734b6421], .slide-leave-active[data-v-734b6421] {\r\n    transition: all 0.25s ease;\n}\n.slide-enter[data-v-734b6421], .slide-leave-to[data-v-734b6421] {\r\n    transform: translateY(-1rem);\r\n    opacity: 0;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-734b6421], .fade-leave-active[data-v-734b6421] {\n    transition: opacity 0.25s ease;\n}\n.fade-enter[data-v-734b6421], .fade-leave-to[data-v-734b6421] {\n    opacity: 0;\n}\n.slide-enter-active[data-v-734b6421], .slide-leave-active[data-v-734b6421] {\n    transition: all 0.25s ease;\n}\n.slide-enter[data-v-734b6421], .slide-leave-to[data-v-734b6421] {\n    transform: translateY(-1rem);\n    opacity: 0;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20858,7 +20859,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "text-black", on: { click: _vm.toggleHover } },
+    {
+      staticClass: "text-black cursor-pointer",
+      on: { click: _vm.toggleHover }
+    },
     [
       _c("span", [_vm._t("nav-option")], 2),
       _vm._v(" "),
@@ -21056,26 +21060,32 @@ var render = function() {
                     "block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none",
                   attrs: { name: "fade", tag: "ul" }
                 },
-                _vm._l(_vm.searchList, function(space) {
-                  return _c("li", { key: space.id }, [
-                    _c("a", { attrs: { href: _vm.spaceUrl(space.id) } }, [
-                      _c("img", {
-                        staticClass: "rounded-full inline",
-                        attrs: {
-                          src: space.icon_picture_path,
-                          width: "32",
-                          height: "32"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "inline",
-                        domProps: { textContent: _vm._s(space.name) }
-                      })
+                [
+                  _vm._l(_vm.searchList, function(space) {
+                    return _c("li", { key: space.id }, [
+                      _c("a", { attrs: { href: _vm.spaceUrl(space.id) } }, [
+                        _c("img", {
+                          staticClass: "rounded-full inline",
+                          attrs: {
+                            src: space.icon_picture_path,
+                            width: "32",
+                            height: "32"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "inline",
+                          domProps: { textContent: _vm._s(space.name) }
+                        })
+                      ])
                     ])
-                  ])
-                }),
-                0
+                  }),
+                  _vm._v(" "),
+                  _vm.searchList.length === 0
+                    ? _c("li", { key: -1 }, [_vm._v("No spaces found...")])
+                    : _vm._e()
+                ],
+                2
               )
             : _vm._e()
         ],
