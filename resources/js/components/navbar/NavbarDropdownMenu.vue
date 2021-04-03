@@ -1,5 +1,5 @@
 <template>
-    <div class="text-black" @click="toggleHover">
+    <div class="text-black cursor-pointer" @click="toggleHover">
         <span>
             <slot name="nav-option"></slot>
         </span>
