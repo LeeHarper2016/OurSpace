@@ -7,7 +7,7 @@
             <div class="flex space-x-5">
                 <space-menu :spaces='@json(auth()->user()->spaces)'></space-menu>
                 @if(isset($space))
-                    <navbar-dropdown-menu :items='[{name: "Edit Space", link: "/spaces/{{ $space->id }}"}, {name: "Delete Space", link: "/spaces/{{ $space->id }}/delete"}, ]'>
+                    <navbar-dropdown-menu :items='[{name: "Edit Space", link: "/spaces/{{ $space->id }}/edit"}, {name: "Delete Space", link: "/spaces/{{ $space->id }}/delete"}, ]'>
                         <template #nav-option>Space Options</template>
                     </navbar-dropdown-menu>
                 @endif
