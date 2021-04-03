@@ -11,7 +11,9 @@
                         <template #nav-option>Space Options</template>
                     </navbar-dropdown-menu>
                 @endif
-                <span class="text-black font-bold">{{ auth()->user()->name  }}</span>
+                <navbar-dropdown-menu :items='[{name: "Profile", link: "/users/{{ auth()->user()->id }}"}, {name: "Edit Account", link: "/users/{{ auth()->user()->id }}/edit"}, ]'>
+                    <template #nav-option>{{ auth()->user()->name }}</template>
+                </navbar-dropdown-menu>
             </div>
         </div>
     @endauth
