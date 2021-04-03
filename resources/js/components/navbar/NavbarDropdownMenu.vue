@@ -1,5 +1,5 @@
 <template>
-    <div @mouseover="toggleHover">
+    <div class="text-black" @mouseover="toggleHover">
         <span>
             <slot name="nav-option"></slot>
         </span>
@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         toggleHover() {
-            this.userHoveredOverMenu = !this.toggleHover();
+            this.userHoveredOverMenu = !this.userHoveredOverMenu;
         }
     }
 }
