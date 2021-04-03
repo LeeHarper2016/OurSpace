@@ -21,6 +21,7 @@
                             class="inline"></span>
                     </a>
                 </li>
+                <li v-if="searchList.length === 0" :key="-1">No spaces found...</li>
             </transition-group>
         </transition>
     </div>
