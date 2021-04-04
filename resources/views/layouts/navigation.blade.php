@@ -1,4 +1,4 @@
-<navbar-menu>
+<div>
     @auth
         <navbar-menu>
             <template #leftSide>
