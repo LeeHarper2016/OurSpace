@@ -1,10 +1,10 @@
 <template>
     <div class="flex justify-between w-full text-center text-white font-bold p-5">
         <div class="space-x-5">
-            <slot name="leftMenu"></slot>
+            <slot name="left-menu"></slot>
         </div>
         <div class="flex space-x-5">
-            <slot name="rightMenu"></slot>
+            <slot name="right-menu"></slot>
         </div>
     </div>
 </template>
