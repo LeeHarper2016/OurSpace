@@ -1,10 +1,10 @@
 <div>
     @auth
         <navbar-menu>
-            <template #leftSide>
+            <template #left-menu>
                 <a href="{{ url('/') }}" class="text-black font-bold">{{ env('APP_NAME') }}</a>
             </template>
-            <template #rightSide>
+            <template #right-menu>
                 <space-menu :spaces='@json(auth()->user()->spaces)'></space-menu>
                 @if(isset($space))
                     <navbar-dropdown-menu :items='[{name: "Edit Space", link: "/spaces/{{ $space->id }}/edit"}, {name: "Delete Space", link: "/spaces/{{ $space->id }}/delete"}, ]'>
