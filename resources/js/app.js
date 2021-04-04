@@ -9,6 +9,7 @@ import ParticleForm from "./components/particle/ParticleForm";
 import ParticleList from "./components/particle/ParticleList";
 import SpaceMenu from "./components/space/SpaceMenu";
 import NavbarDropdownMenu from "./components/navbar/NavbarDropdownMenu";
+import NavbarMenu from "./components/navbar/NavbarMenu";
 
 new Vue({
     el: '#app',
@@ -25,7 +26,8 @@ new Vue({
         ParticleList,
         ParticleForm,
         SpaceMenu,
-        NavbarDropdownMenu
+        NavbarDropdownMenu,
+        NavbarMenu
     },
     methods: {
         addError(message) {
