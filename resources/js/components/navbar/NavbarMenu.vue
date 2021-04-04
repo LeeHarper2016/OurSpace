@@ -8,9 +8,10 @@
 
 <script>
 export default {
+    props: ['space', 'user'],
     data() {
         return {
-            
+
         }
     }
 }
