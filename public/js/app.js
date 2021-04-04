@@ -21030,9 +21030,9 @@ var render = function() {
         "flex justify-between w-full text-center text-white font-bold p-5"
     },
     [
-      _c("div", { staticClass: "space-x-5" }, [_vm._t("leftMenu")], 2),
+      _c("div", { staticClass: "space-x-5" }, [_vm._t("left-menu")], 2),
       _vm._v(" "),
-      _c("div", { staticClass: "flex space-x-5" }, [_vm._t("rightMenu")], 2)
+      _c("div", { staticClass: "flex space-x-5" }, [_vm._t("right-menu")], 2)
     ]
   )
 }
