@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Space;
 use App\Models\User;
+use App\Models\UserInSpace;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SpacePolicy
@@ -53,7 +54,7 @@ class SpacePolicy
      */
     public function update(User $user, Space $space)
     {
-        //
+
     }
 
     /**
@@ -65,7 +66,9 @@ class SpacePolicy
      */
     public function delete(User $user, Space $space)
     {
-        //
+        return $user->id === $space->owner_id
+            ? Response::allow()
+            : Response::deny('You are not the owner of this space.');
     }
 
     /**
