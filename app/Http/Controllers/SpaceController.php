@@ -58,12 +58,12 @@ class SpaceController extends Controller
      * @return string The final relative file path to the image.
      *
      **************************************************************************/
-    private function assignUserToSpace(Space $space, bool $isOwner) {
+    private function assignUserToSpace(Space $space) {
         $spaceConnection = new UserInSpace;
+
         $spaceConnection->fill([
             'user_id' => auth()->user()->id,
-            'space_id' => $space->id,
-            'is_owner' => $isOwner
+            'space_id' => $space->id
         ]);
 
         $spaceConnection->save();
@@ -145,7 +145,7 @@ class SpaceController extends Controller
 
         $space->save();
 
-        $this->assignUserToSpace($space, true);
+        $this->assignUserToSpace($space);
 
         return redirect('/')->with(['status' => 'success']);
     }
