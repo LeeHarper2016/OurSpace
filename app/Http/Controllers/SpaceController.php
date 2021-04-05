@@ -138,6 +138,7 @@ class SpaceController extends Controller
         $space->fill([
             'name' => $validatedData['name'],
             'description' => $validatedData['description'],
+            'owner_id' => auth()->user()->id,
             'icon_picture_path' => $finalIconPath,
             'banner_picture_path' => $finalBannerPath
         ]);
