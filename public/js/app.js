@@ -2415,7 +2415,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.slide-enter-active[data-v-57043684], .slide-leave-active[data-v-57043684] {\r\n    transition: all 0.25s ease;\n}\n.slide-enter[data-v-57043684], .slide-leave-to[data-v-57043684] {\r\n    transform: translateY(-1rem);\r\n    opacity: 0;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.slide-enter-active[data-v-57043684], .slide-leave-active[data-v-57043684] {\n    transition: all 0.25s ease;\n}\n.slide-enter[data-v-57043684], .slide-leave-to[data-v-57043684] {\n    transform: translateY(-1rem);\n    opacity: 0;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20971,7 +20971,7 @@ var render = function() {
     "div",
     {
       staticClass: "text-black cursor-pointer",
-      on: { click: _vm.toggleHover }
+      on: { mouseenter: _vm.toggleHover, mouseleave: _vm.toggleHover }
     },
     [
       _c("span", [_vm._t("nav-option")], 2),
