@@ -180,10 +180,12 @@ class SpaceController extends Controller
     public function edit($id) {
         $space = Space::find($id);
 
-        if (isset($space)) {
+        $response = Gate::inspect('update', $space);
+
+        if ($response->allowed()) {
             return view('spaces.update')->with(['space' => $space]);
         } else {
-            return redirect('/')->withErrors(['There is no space with the ID supplied.']);
+            return redirect('/')->withErrors($response->message());
         }
 
     }
