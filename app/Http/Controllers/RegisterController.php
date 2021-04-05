@@ -38,8 +38,7 @@ class RegisterController extends Controller
     *************************************************************/
     public function registerUser(Request $request) {
         if ($request->password !== $request->passwordConfirm) {
-            return redirect()
-                ->back()
+            return back()
                 ->withErrors('The password combination entered was incorrect. Please try again');
         } else {
             $validateData = $request->validate([
