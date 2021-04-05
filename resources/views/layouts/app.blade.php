@@ -25,11 +25,11 @@
         <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="antialiased">
-        <div id="app" class="h-full">
+        <div id="app">
             <div class="block bg-white w-full h-20 border-b-2 border-purple-900">
                  @include('layouts.navigation')
             </div>
-            <div class="flex">
+            <div class="flex min-h-screen h-full">
                 <div class="inline-block w-3/4 bg-purple-300">
                     <error-message-list :errors='@json($errors->all())'></error-message-list>
                     @yield('content')
