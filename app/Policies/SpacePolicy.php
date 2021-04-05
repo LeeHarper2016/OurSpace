@@ -42,7 +42,7 @@ class SpacePolicy
      * @return mixed
      */
     public function create(User $user) {
-        return isset($user)
+        return $user->exists
             ? Response::allow()
             : Response::deny('You are not currently logged in.');
     }
