@@ -247,7 +247,7 @@ class SpaceController extends Controller
     public function destroy(int $id) {
         $space = Space::find($id);
 
-        $response = Gate::inspect('update', $space);
+        $response = Gate::inspect('delete', $space);
 
         if ($response->allowed()) {
             if (isset($space)) {
@@ -263,6 +263,7 @@ class SpaceController extends Controller
                 return redirect('/')->with(['status' => 'success']);
             }
         } else {
+            dd($response);
             return back()
                 ->withErrors($response->message());
         }
