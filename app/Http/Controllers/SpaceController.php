@@ -108,13 +108,7 @@ class SpaceController extends Controller
      * @return View
      */
     public function create() {
-        $response = Gate::inspect('create');
-
-        if ($response->allowed()) {
-            return view('spaces.create');
-        } else {
-            return back()->withErrors($response->message());
-        }
+        return view('spaces.create');
     }
 
     /********************************************************************************
