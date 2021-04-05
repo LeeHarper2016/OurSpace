@@ -25,5 +25,11 @@
             </div>
             <button type="submit" class="p-3 bg-gray-400 border border-black rounded w-20 ml-auto mr-auto">Submit</button>
         </form>
+        <form class="flex flex-col mr-auto ml-auto space-y-5 mt-5" method="post"
+              action="{{ route('spaces.destroy', ['space' => $space->id]) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="p-3 bg-red-400 border border-black rounded w-40 ml-auto mr-auto">Delete Space</button>
+        </form>
     </div>
 @endsection
