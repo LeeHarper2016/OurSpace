@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Validation\ValidationException;
-
 use App\Models\Particle;
 use App\Models\Space;
 use App\Models\UserInSpace;
@@ -249,21 +245,24 @@ class SpaceController extends Controller
     public function destroy(int $id) {
         $space = Space::find($id);
 
-        if (isset($space)) {
-            if (Storage::exists($space->icon_picture_path)) {
-                Storage::delete($space->icon_picture_path);
-            }
-            if (Storage::exists($space->banner_picture_path)) {
-                Storage::delete($space->banner_picture_path);
-            }
+        $response = Gate::inspect('update', $space);
 
-            $space->delete();
+        if ($response->allowed()) {
+            if (isset($space)) {
+                if (Storage::exists($space->icon_picture_path)) {
+                    Storage::delete($space->icon_picture_path);
+                }
+                if (Storage::exists($space->banner_picture_path)) {
+                    Storage::delete($space->banner_picture_path);
+                }
 
-            return redirect('/')->with(['status' => 'success']);
+                $space->delete();
+
+                return redirect('/')->with(['status' => 'success']);
+            }
         } else {
-            return redirect()->back()
-                ->withErrors(['There is no space with that specified ID.']);
+            return back()
+                ->withErrors($response->message);
         }
-
     }
 }
