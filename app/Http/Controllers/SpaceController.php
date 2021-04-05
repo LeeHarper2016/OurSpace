@@ -241,11 +241,11 @@ class SpaceController extends Controller
      * Postcondition: The space is removed from the database, and any
      *                files associated with it are deleted.
      *
-     * @param  int  $id ID of the space to be deleted.
+     * @param  int $id ID of the space to be deleted.
      * @return Response Redirection to the homepage.
      *
      *******************************************************************************/
-    public function destroy($id) {
+    public function destroy(int $id) {
         $space = Space::find($id);
 
         if (isset($space)) {
