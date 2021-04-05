@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Space;
 use App\Models\User;
 use App\Models\UserInSpace;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class SpacePolicy
