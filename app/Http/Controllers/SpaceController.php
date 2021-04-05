@@ -113,7 +113,7 @@ class SpaceController extends Controller
         if ($response->allowed()) {
             return view('spaces.create');
         } else {
-            return redirect('/')->withErrors($response->message());
+            return back()->withErrors($response->message());
         }
     }
 
