@@ -13,7 +13,6 @@ class UserInSpace extends Model
 
     protected $fillable = [
         'user_id',
-        'space_id',
-        'is_owner'
+        'space_id'
     ];
 }
