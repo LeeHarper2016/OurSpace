@@ -17,7 +17,7 @@ class CreateSpacesTable extends Migration
             $table->id();
             $table->text('name');
             $table->text('description');
-            $table->foreignId('is_owner');
+            $table->foreignId('owner_id');
             $table->text('icon_picture_path');
             $table->text('banner_picture_path');
             $table->timestamps();
