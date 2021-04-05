@@ -55,7 +55,6 @@ class User extends Authenticatable
      *******************************************************************/
     public function spaces() {
         return $this->belongsToMany(Space::class, 'user_in_spaces')
-            ->withPivot('is_owner')
             ->withTimestamps();
     }
 }
