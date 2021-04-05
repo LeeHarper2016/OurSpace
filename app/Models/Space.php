@@ -15,6 +15,7 @@ class Space extends Model
     protected $fillable = [
         'name',
         'description',
+        'owner_id',
         'icon_picture_path',
         'banner_picture_path'
     ];
