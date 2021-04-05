@@ -85,7 +85,7 @@ class SpaceController extends Controller
         $imageName = $image->hashName();
         $image->store($imagePath);
 
-        return Storage::url($imagePath . $imageName);
+        return $imagePath . $imageName;
     }
 
     /***************************************************************************
@@ -128,8 +128,8 @@ class SpaceController extends Controller
     public function store(Request $request) {
         $validatedData = $this->validateFormData($request, true);
 
-        $iconImagePath = 'public/images/space_icons/';
-        $bannerImagePath = 'public/images/banner_images/';
+        $iconImagePath = 'images/space_icons/';
+        $bannerImagePath = 'images/banner_images/';
 
         $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
         $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
@@ -202,8 +202,8 @@ class SpaceController extends Controller
         $space = Space::find($id);
 
         if (isset($space)) {
-            $iconImagePath = 'public/images/space_icons/';
-            $bannerImagePath = 'public/images/banner_images/';
+            $iconImagePath = 'images/space_icons/';
+            $bannerImagePath = 'images/banner_images/';
 
 
             if (isset($validatedData['icon_picture'])) {
