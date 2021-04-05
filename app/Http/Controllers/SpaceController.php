@@ -7,6 +7,7 @@ use App\Models\Space;
 use App\Models\UserInSpace;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
@@ -263,7 +264,7 @@ class SpaceController extends Controller
             }
         } else {
             return back()
-                ->withErrors($response->message);
+                ->withErrors($response->message());
         }
     }
 }
