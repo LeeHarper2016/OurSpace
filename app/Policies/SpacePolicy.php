@@ -41,9 +41,10 @@ class SpacePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user)
-    {
-        //
+    public function create(User $user) {
+        return isset($user)
+            ? Response::allow()
+            : Response::deny('You are not currently logged in.');
     }
 
     /**
@@ -53,9 +54,10 @@ class SpacePolicy
      * @param  \App\Models\Space  $space
      * @return mixed
      */
-    public function update(User $user, Space $space)
-    {
-
+    public function update(User $user, Space $space) {
+        return $user->id === $space->owner_id
+            ? Response::allow()
+            : Response::deny('You are not the owner of this space.');
     }
 
     /**
@@ -65,8 +67,7 @@ class SpacePolicy
      * @param  \App\Models\Space  $space
      * @return mixed
      */
-    public function delete(User $user, Space $space)
-    {
+    public function delete(User $user, Space $space) {
         return $user->id === $space->owner_id
             ? Response::allow()
             : Response::deny('You are not the owner of this space.');
