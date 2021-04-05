@@ -17,7 +17,6 @@ class CreateUserInSpacesTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('space_id');
-            $table->boolean('is_owner');
             $table->timestamps();
         });
     }
