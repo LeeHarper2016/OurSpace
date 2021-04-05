@@ -249,11 +249,11 @@ class SpaceController extends Controller
         $space = Space::find($id);
 
         if (isset($space)) {
-            if (Storage::exists($space->icon_file_path)) {
-                Storage::delete($space->icon_file_path);
+            if (Storage::exists($space->icon_picture_path)) {
+                Storage::delete($space->icon_picture_path);
             }
-            if (Storage::exists($space->banner_file_path)) {
-                Storage::delete($space->banner_file_path);
+            if (Storage::exists($space->banner_picture_path)) {
+                Storage::delete($space->banner_picture_path);
             }
 
             $space->delete();
