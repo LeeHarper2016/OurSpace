@@ -3,8 +3,6 @@
         <input type="text"
                placeholder="Search Spaces"
                v-model="userSearch"
-               @keydown="checkIfClear"
-               @keyup="onUserSearch"
                class="text-black w-64 border p-1 pl-3 rounded-md" />
         <transition name="slide">
             <transition-group name="fade"
@@ -66,19 +64,18 @@ export default {
         }
     },
     methods: {
-        checkIfClear() {
-            if (this.userSearch === '') {
-                this.userIsSearching = false;
-            }
-        },
-        onUserSearch() {
-            if (this.userSearch !== '') {
-                this.userIsSearching = true;
-            }
-        },
         spaceUrl(id) {
             return '/spaces/' + id;
         }
     },
+    watch: {
+        userSearch() {
+            if (this.userSearch === '') {
+                this.userIsSearching = false;
+            } else {
+                this.userIsSearching = true;
+            }
+        }
+    }
 }
 </script>
