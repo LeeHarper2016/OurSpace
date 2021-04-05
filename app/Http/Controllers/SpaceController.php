@@ -6,6 +6,7 @@ use App\Models\Particle;
 use App\Models\Space;
 use App\Models\UserInSpace;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
