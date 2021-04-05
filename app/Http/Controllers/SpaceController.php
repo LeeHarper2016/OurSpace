@@ -263,7 +263,6 @@ class SpaceController extends Controller
                 return redirect('/')->with(['status' => 'success']);
             }
         } else {
-            dd($response);
             return back()
                 ->withErrors($response->message());
         }
