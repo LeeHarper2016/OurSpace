@@ -2135,8 +2135,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['spaces'],
   data: function data() {
@@ -2159,18 +2157,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    checkIfClear: function checkIfClear() {
-      if (this.userSearch === '') {
-        this.userIsSearching = false;
-      }
-    },
-    onUserSearch: function onUserSearch() {
-      if (this.userSearch !== '') {
-        this.userIsSearching = true;
-      }
-    },
     spaceUrl: function spaceUrl(id) {
       return '/spaces/' + id;
+    }
+  },
+  watch: {
+    userSearch: function userSearch() {
+      if (this.userSearch === '') {
+        this.userIsSearching = false;
+      } else {
+        this.userIsSearching = true;
+      }
     }
   }
 });
@@ -2439,7 +2436,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-734b6421], .fade-leave-active[data-v-734b6421] {\r\n    transition: opacity 0.25s ease;\n}\n.fade-enter[data-v-734b6421], .fade-leave-to[data-v-734b6421] {\r\n    opacity: 0;\n}\n.slide-enter-active[data-v-734b6421], .slide-leave-active[data-v-734b6421] {\r\n    transition: all 0.25s ease;\n}\n.slide-enter[data-v-734b6421], .slide-leave-to[data-v-734b6421] {\r\n    transform: translateY(-1rem);\r\n    opacity: 0;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active[data-v-734b6421], .fade-leave-active[data-v-734b6421] {\n    transition: opacity 0.25s ease;\n}\n.fade-enter[data-v-734b6421], .fade-leave-to[data-v-734b6421] {\n    opacity: 0;\n}\n.slide-enter-active[data-v-734b6421], .slide-leave-active[data-v-734b6421] {\n    transition: all 0.25s ease;\n}\n.slide-enter[data-v-734b6421], .slide-leave-to[data-v-734b6421] {\n    transform: translateY(-1rem);\n    opacity: 0;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21183,8 +21180,6 @@ var render = function() {
         attrs: { type: "text", placeholder: "Search Spaces" },
         domProps: { value: _vm.userSearch },
         on: {
-          keydown: _vm.checkIfClear,
-          keyup: _vm.onUserSearch,
           input: function($event) {
             if ($event.target.composing) {
               return
