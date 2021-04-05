@@ -11,7 +11,7 @@
                         <template #nav-option>Space Options</template>
                     </navbar-dropdown-menu>
                 @endif
-                <navbar-dropdown-menu :items='[{name: "Profile", link: "/users/{{ auth()->user()->id }}"}, {name: "Edit Account", link: "/users/{{ auth()->user()->id }}/edit"}, ]'>
+                <navbar-dropdown-menu :items='[{name: "Profile", link: "/users/{{ auth()->user()->id }}"}, {name: "Edit Account", link: "/users/{{ auth()->user()->id }}/edit"}, {name: "Log Out", link: "/logout"} ]'>
                     <template #nav-option>{{ auth()->user()->name }}</template>
                 </navbar-dropdown-menu>
             </template>
