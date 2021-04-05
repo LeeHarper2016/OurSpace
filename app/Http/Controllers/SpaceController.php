@@ -196,39 +196,45 @@ class SpaceController extends Controller
      * @return Response
      */
     public function update(Request $request, int $id) {
-        $validatedData = $this->validateFormData($request, false);
-
         $space = Space::find($id);
 
-        if (isset($space)) {
-            $iconImagePath = 'images/space_icons/';
-            $bannerImagePath = 'images/banner_images/';
+        $response = Gate::inspect('update', $space);
+
+        if ($response->allowed()) {
+            $validatedData = $this->validateFormData($request, false);
+
+            if (isset($space)) {
+                $iconImagePath = 'images/space_icons/';
+                $bannerImagePath = 'images/banner_images/';
 
 
-            if (isset($validatedData['icon_picture'])) {
-                $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
+                if (isset($validatedData['icon_picture'])) {
+                    $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
+                } else {
+                    $finalIconPath = $space->icon_picture_path;
+                }
+
+                if (isset($validatedData['banner_picture'])) {
+                    $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
+                } else {
+                    $finalBannerPath = $space->banner_picture_path;
+                }
+
+                $space->fill([
+                    'name' => $validatedData['name'],
+                    'description' => $validatedData['description'],
+                    'icon_picture_path' => $finalIconPath,
+                    'banner_picture_path' => $finalBannerPath
+                ]);
+
+                $space->save();
+
+                return redirect('/')->with(['status' => 'success']);
             } else {
-                $finalIconPath = $space->icon_picture_path;
+                return back()->withErrors(['There is no space with the ID supplied.']);
             }
-
-            if (isset($validatedData['banner_picture'])) {
-                $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
-            } else {
-                $finalBannerPath = $space->banner_picture_path;
-            }
-
-            $space->fill([
-                'name' => $validatedData['name'],
-                'description' => $validatedData['description'],
-                'icon_picture_path' => $finalIconPath,
-                'banner_picture_path' => $finalBannerPath
-            ]);
-
-            $space->save();
-
-            return redirect('/')->with(['status' => 'success']);
         } else {
-            return redirect()->back()->withErrors(['There is no space with the ID supplied.']);
+            return back()->withErrors($response->message());
         }
     }
 
