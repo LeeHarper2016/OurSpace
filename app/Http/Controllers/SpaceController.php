@@ -130,28 +130,34 @@ class SpaceController extends Controller
      *
      *******************************************************************************/
     public function store(Request $request) {
-        $validatedData = $this->validateFormData($request, true);
+        $response = Gate::inspect('create');
 
-        $iconImagePath = 'images/space_icons/';
-        $bannerImagePath = 'images/banner_images/';
+        if ($response->allowed()) {
+            $validatedData = $this->validateFormData($request, true);
 
-        $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
-        $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
+            $iconImagePath = 'images/space_icons/';
+            $bannerImagePath = 'images/banner_images/';
 
-        $space = new Space;
-        $space->fill([
-            'name' => $validatedData['name'],
-            'description' => $validatedData['description'],
-            'owner_id' => auth()->user()->id,
-            'icon_picture_path' => $finalIconPath,
-            'banner_picture_path' => $finalBannerPath
-        ]);
+            $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
+            $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
 
-        $space->save();
+            $space = new Space;
+            $space->fill([
+                'name' => $validatedData['name'],
+                'description' => $validatedData['description'],
+                'owner_id' => auth()->user()->id,
+                'icon_picture_path' => $finalIconPath,
+                'banner_picture_path' => $finalBannerPath
+            ]);
 
-        $this->assignUserToSpace($space);
+            $space->save();
 
-        return redirect('/')->with(['status' => 'success']);
+            $this->assignUserToSpace($space);
+
+            return redirect('/')->with(['status' => 'success']);
+        } else {
+            return redirect('/')->withErrors($response->message());
+        }
     }
 
 
