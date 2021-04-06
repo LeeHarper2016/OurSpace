@@ -7,11 +7,11 @@
         @csrf
         <div class="flex flex-col w-64">
             <label for="name">Name:</label>
-            <input type="text" name="name" />
+            <input type="text" name="name" value="{{ old('name') }}" />
         </div>
         <div class="flex flex-col">
             <label for="email">Email:</label>
-            <input type="email" name="email" />
+            <input type="email" name="email" value="{{ old('email') }}" />
         </div>
         <div class="flex flex-col">
             <label for="password">Password:</label>
