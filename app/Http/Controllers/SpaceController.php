@@ -106,8 +106,6 @@ class SpaceController extends Controller
     public function store(SpaceRequest $request) {
         $response = Gate::inspect('create', Space::class);
 
-        dd($response);
-
         if ($response->allowed()) {
             $validatedData = $request->validated();
             $iconImagePath = 'images/space_icons/';
