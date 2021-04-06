@@ -12,38 +12,6 @@ use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller
 {
-
-    /*******************************************************************************
-     *
-     * Function: SpaceController.validateFormData()
-     * Purpose: Validates data pertaining to Spaces.
-     * Precondition: N/A.
-     * Postcondition: The form data is validated.
-     *
-     * @param Request $request The entire http request.
-     * @param bool $requireImages Determines whether images should be required.
-     * @return array Array of the validated form view.
-     * @throws ValidationException Exception thrown when the data is not successfully
-     *                             validated.
-     *******************************************************************************/
-    private function validateFormData(Request $request, bool $requireImages) {
-        if ($requireImages) {
-            return $this->validate($request, [
-                'name' => 'required',
-                'description' => 'required',
-                'icon_picture' => ['image', 'required'],
-                'banner_picture' => ['image', 'required']
-            ]);
-        } else {
-            return $this->validate($request, [
-                'name' => 'required',
-                'description' => 'required',
-                'icon_picture' => 'image',
-                'banner_picture' => 'image'
-            ]);
-        }
-    }
-
     /***************************************************************************
      *
      * Function: SpaceController.assignUserToSpace()
