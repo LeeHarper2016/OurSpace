@@ -6,7 +6,6 @@ use App\Http\Requests\SpaceRequest;
 use App\Models\Particle;
 use App\Models\Space;
 use App\Models\UserInSpace;
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +14,7 @@ class SpaceController extends Controller
 {
     /***************************************************************************
      *
-     * Function: SpaceController.assignUserToSpace()
+     * Function: SpaceController.assignUserToSpace(Space $space)
      * Purpose: Uploads an image to the server using a given path.
      * Precondition: N/A.
      * Post-condition: The image is uploaded to the server.
@@ -37,7 +36,7 @@ class SpaceController extends Controller
 
     /***************************************************************************
      *
-     * Function: SpaceController.uploadImage()
+     * Function: SpaceController.uploadImage(string $imagePath, UploadedFile $image)
      * Purpose: Uploads an image to the server using a given path.
      * Precondition: N/A.
      * Post-condition: The image is uploaded to the server.
@@ -61,7 +60,7 @@ class SpaceController extends Controller
      * Precondition: N/A.
      * Post-condition: N/A.
      *
-     * @return View The view containing the list of spaces.
+     * @return mixed The view containing the list of spaces.
      *
      *************************************************************************/
     public function index() {
@@ -70,11 +69,18 @@ class SpaceController extends Controller
         return view('spaces.list')->with(['spaces' => $spaces]);
     }
 
-    /**
-     * Show the form for creating a new resource.
+    /***************************************************************************
      *
-     * @return View
-     */
+     * Function: SpaceController.create().
+     * Purpose: Show the form for creating a new resource.
+     * Precondition: The user is authenticated to perform the action.
+     * Postcondition: N/A.
+     *
+     * @return mixed The view containing the form used to create a space, or a
+     *               redirection to the homepage if the action was not
+     *               authenticated.
+     *
+     **************************************************************************/
     public function create() {
         $response = Gate::inspect('create', Space::class);
 
@@ -87,14 +93,14 @@ class SpaceController extends Controller
 
     /********************************************************************************
      *
-     * Function: SpaceController.store(Request $request)
+     * Function: SpaceController.store(SpaceRequest $request)
      * Purpose: Creates a new Space object using user-input data and stores
      *          it within the database.
      * Precondition: The form data is valid.
      * Postcondition: A new Space model is instantiated.
      *
-     * @param SpaceRequest $request The full http request.
-     * @return Response A redirection to the homepage.
+     * @param SpaceRequest $request The validated request object.
+     * @return mixed A redirection to the homepage, including errors if necessary.
      *
      *******************************************************************************/
     public function store(SpaceRequest $request) {
@@ -131,7 +137,7 @@ class SpaceController extends Controller
 
     /***************************************************************************
      *
-     * Function: SpaceController.show()
+     * Function: SpaceController.show(int $id)
      * Purpose: Displays a space, as well as its particles, to the user.
      * Precondition: N/A.
      * Post-condition: N/A.
@@ -139,10 +145,10 @@ class SpaceController extends Controller
      * TODO: Decouple particles from spaces if possible.
      *
      * @param $id int The ID of the space being accessed.
-     * @return View The view containing the particles of the space.
+     * @return mixed The view containing the particles of the space.
      *
      **************************************************************************/
-    public function show($id) {
+    public function show(int $id) {
         $space = Space::find($id);
         $particles = Particle::with('user')
             ->where('space_id', $id)
@@ -151,13 +157,19 @@ class SpaceController extends Controller
         return view('spaces.home')->with(['space' => $space, 'particles' => $particles]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
+    /***************************************************************************
      *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id) {
+     * Function: SpaceController.edit(int $id).
+     * Purpose: Show the form for editing the specified resource.
+     * Precondition: The user is authenticated to view the form.
+     * Postcondition: N/A.
+     *
+     * @param  int $id The ID of the space to be edited.
+     * @return mixed The view containing the form to edit the space, or a
+     *               redirection if the action was not authenticated.
+     *
+     **************************************************************************/
+    public function edit(int $id) {
         $space = Space::find($id);
 
         $response = Gate::inspect('update', $space);
@@ -170,14 +182,20 @@ class SpaceController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
+    /***************************************************************************
      *
-     * @param SpaceRequest $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, int $id) {
+     * Function: SpaceController.update(SpaceRequest $request, int $id).
+     * Purpose: Update the specified resource in storage.
+     * Precondition: The user is authenticated to perform the action.
+     * Postcondition: N/A.
+     *
+     * @param SpaceRequest $request The validated request object.
+     * @param int $id The ID of the space to be edited.
+     * @return mixed Redirection to the homepage if successful, redirection to
+     *               previous page if there are errors.
+     *
+     **************************************************************************/
+    public function update(SpaceRequest $request, int $id) {
         $space = Space::find($id);
 
         $response = Gate::inspect('update', $space);
@@ -222,14 +240,14 @@ class SpaceController extends Controller
 
     /********************************************************************************
      *
-     * Function: SpaceController.destroy().
+     * Function: SpaceController.destroy(int $id).
      * Purpose: Remove the specified resource from storage.
      * Precondition: The space exists within the database.
      * Postcondition: The space is removed from the database, and any
      *                files associated with it are deleted.
      *
      * @param  int $id ID of the space to be deleted.
-     * @return Response Redirection to the homepage.
+     * @return mixed Redirection to the homepage.
      *
      *******************************************************************************/
     public function destroy(int $id) {
