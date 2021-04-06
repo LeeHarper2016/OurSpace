@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
 
 class LoginController extends Controller
@@ -34,18 +35,18 @@ class LoginController extends Controller
      * Postcondition: The user's session is authenticated if valid, redirected with
      *                errors if not..
      *
-     * @param Request $request The total http request.
+     * @param LoginRequest $request The total http request.
      * @return Response Redirection to the homepage if successful, but to the form
      *                  if there are any errors.
      *
      ****************************************************************************/
-    public function loginUser(Request $request) {
-        $credentials = $request->only(['email', 'password']);
+    public function loginUser(LoginRequest $request) {
+        $validatedData = $request->validated();
 
-        $user = User::firstWhere(['email' => $credentials['email']]);
+        $user = User::firstWhere(['email' => $validatedData['email']]);
 
         if (isset($user)) {
-            if (Hash::check($credentials['password'], $user->password)) {
+            if (Hash::check($validatedData['password'], $user->password)) {
                 Auth::login($user);
                 $request->session()->regenerate();
 
