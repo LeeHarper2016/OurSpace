@@ -26,8 +26,7 @@ Route::get('/register', [RegisterController::class, 'view']);
 Route::get('/login', [LoginController::class, 'view']);
 Route::get('/logout', [LoginController::class, 'logOutUser']);
 
-Route::resource('spaces', SpaceController::class)
-    ->middleware('can:create,App\Models\Space');
+Route::resource('spaces', SpaceController::class);
 
 Route::post('/spaces/{space}/particles', [ParticleController::class, 'store'])
     ->name('particles.store');
