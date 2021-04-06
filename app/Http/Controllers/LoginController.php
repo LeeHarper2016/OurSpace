@@ -72,18 +72,12 @@ class LoginController extends Controller
      *
      ***************************************************************************************/
     public function logOutUser(Request $request) {
-        $currentUser = auth()->user();
+        Auth::logout();
 
-        if (isset($currentUser)) {
-            Auth::logout();
+        $request->session()->invalidate();
 
-            $request->session()->invalidate();
+        $request->session()->regenerate();
 
-            $request->session()->regenerate();
-
-            return redirect('/');
-        } else {
-            return back()->withErrors(['This email is not associated with an account.']);
-        }
+        return redirect('/');
     }
 }
