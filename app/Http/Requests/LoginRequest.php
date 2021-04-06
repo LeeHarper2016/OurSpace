@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoginRequest extends FormRequest
 {
@@ -15,7 +16,7 @@ class LoginRequest extends FormRequest
      *
      ********************************************************************/
     public function authorize() {
-        return true;
+        return is_null(Auth::user()->getKey());
     }
 
     /*********************************************************************
@@ -26,10 +27,10 @@ class LoginRequest extends FormRequest
      * @return array
      *
      ********************************************************************/
-    public function rules()
-    {
+    public function rules() {
         return [
-            //
+            'email' => 'required',
+            'body' => 'required'
         ];
     }
 }
