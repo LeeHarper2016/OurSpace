@@ -23,26 +23,29 @@ class SpaceRequest extends FormRequest
      * Function Name: SpaceRequest.rules().
      * Purpose: The validation rules that the request must follow.
      *
-     * @param bool $requireImages Boolean that determines if images must
-     *              be recorded within the request.
      * @return array An array of rules for the request to accommodate.
      *
      ********************************************************************/
-    public function rules(bool $requireImages) {
-        if ($requireImages) {
-            return [
-                'name' => 'required',
-                'description' => 'required',
-                'icon_picture' => ['image', 'required'],
-                'banner_picture' => ['image', 'required']
-            ];
-        } else {
-            return [
-                'name' => 'required',
-                'description' => 'required',
-                'icon_picture' => 'image',
-                'banner_picture' => 'image'
-            ];
+    public function rules() {
+        switch($this->method()) {
+            case 'POST':{
+                return [
+                    'name' => 'required',
+                    'description' => 'required',
+                    'icon_picture' => ['image', 'required'],
+                    'banner_picture' => ['image', 'required']
+                ];
+            }
+            case 'PATCH':
+            case 'PUT': {
+                return [
+                    'name' => 'required',
+                    'description' => 'required',
+                    'icon_picture' => 'image',
+                    'banner_picture' => 'image'
+                ];
+            }
+            default: break;
         }
     }
 }
