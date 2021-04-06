@@ -32,8 +32,8 @@ class SpaceRequest extends FormRequest
                 return [
                     'name' => 'required',
                     'description' => 'required',
-                    'icon_picture' => ['image', 'required'],
-                    'banner_picture' => ['image', 'required']
+                    'icon_picture' => ['image', 'lte:10000', 'required'],
+                    'banner_picture' => ['image', 'lte:10000', 'required']
                 ];
             }
             case 'PATCH':
