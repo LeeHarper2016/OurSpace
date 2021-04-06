@@ -13,7 +13,7 @@ class LoginRequest extends FormRequest
      * Function Name: LoginRequest.attributes().
      * Purpose: Sets the attribute names for the field values.
      *
-     * @return array
+     * @return array An array of fields with their associated attribute name.
      *
      ********************************************************************/
     public function attributes() {
@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
      * Function Name: LoginRequest.authorize().
      * Purpose: Determine if the user is authorized to make this request.
      *
-     * @return bool
+     * @return bool A boolean determining if the user is authorized.
      *
      ********************************************************************/
     public function authorize() {
@@ -40,7 +40,7 @@ class LoginRequest extends FormRequest
      * Function Name: LoginRequest.rules().
      * Purpose: The validation rules that the request must follow.
      *
-     * @return array
+     * @return array An array of rules for the request to accommodate.
      *
      ********************************************************************/
     public function rules() {
