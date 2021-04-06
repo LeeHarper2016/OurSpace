@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
@@ -19,7 +18,7 @@ class RegisterController extends Controller
      *               display.
      * Postcondition: N/A.
      *
-     * @returns view View containing registration form.
+     * @returns mixed View containing registration form.
      *
      ************************************************************/
     public function view() {
@@ -35,7 +34,7 @@ class RegisterController extends Controller
      *
      * @param RegisterRequest $request Request containing the
      *        validated registration data from the form..
-     * @return RedirectResponse Redirection to the homepage.
+     * @return mixed Redirection to the homepage.
      *
     *************************************************************/
     public function registerUser(RegisterRequest $request) {
@@ -50,6 +49,8 @@ class RegisterController extends Controller
         ]);
 
         $user->save();
+
+        Auth::login($user);
 
         return redirect('/')->with(['status' => 'Registration successful!']);
     }
