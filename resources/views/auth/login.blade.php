@@ -7,7 +7,7 @@
         @csrf
         <div class="flex flex-col">
             <label for="email">Email:</label>
-            <input type="email" name="email" />
+            <input type="email" name="email" value="{{ old('email') }}" />
         </div>
         <div class="flex flex-col">
             <label for="password">Password:</label>
