@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SpaceRequest;
 use App\Models\Particle;
 use App\Models\Space;
 use App\Models\UserInSpace;
@@ -92,15 +93,15 @@ class SpaceController extends Controller
      * Precondition: The form data is valid.
      * Postcondition: A new Space model is instantiated.
      *
-     * @param Request $request The full http request.
+     * @param SpaceRequest $request The full http request.
      * @return Response A redirection to the homepage.
      *
      *******************************************************************************/
-    public function store(Request $request) {
+    public function store(SpaceRequest $request) {
         $response = Gate::inspect('create');
 
         if ($response->allowed()) {
-            $validatedData = $this->validateFormData($request, true);
+            $validatedData = $request->validated();
 
             $iconImagePath = 'images/space_icons/';
             $bannerImagePath = 'images/banner_images/';
@@ -172,7 +173,7 @@ class SpaceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param SpaceRequest $request
      * @param int $id
      * @return Response
      */
@@ -182,7 +183,7 @@ class SpaceController extends Controller
         $response = Gate::inspect('update', $space);
 
         if ($response->allowed()) {
-            $validatedData = $this->validateFormData($request, false);
+            $validatedData = $request->validated();
 
             if (isset($space)) {
                 $iconImagePath = 'images/space_icons/';
