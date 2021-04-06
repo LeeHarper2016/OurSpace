@@ -41,8 +41,8 @@ class SpacePolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user) {
-        return $user->exists
+    public function create(User $user = null) {
+        return !is_null($user)
             ? Response::allow()
             : Response::deny('You are not currently logged in.');
     }
