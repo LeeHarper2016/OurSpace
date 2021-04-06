@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,32 +33,24 @@ class RegisterController extends Controller
      * Precondition: N/A.
      * Postcondition: A new user is added to the database.
      *
-     * @param Request $request The total http request.
+     * @param RegisterRequest $request Request containing the
+     *        validated registration data from the form..
      * @return RedirectResponse Redirection to the homepage.
      *
     *************************************************************/
-    public function registerUser(Request $request) {
-        if ($request->password !== $request->passwordConfirm) {
-            return back()
-                ->withErrors('The password combination entered was incorrect. Please try again');
-        } else {
-            $validateData = $request->validate([
-                'name' => 'required',
-                'email' => 'required',
-                'password' => 'required'
-            ]);
+    public function registerUser(RegisterRequest $request) {
+        $validateData = $request->validated();
 
-            $user = new User;
+        $user = new User;
 
-            $user->fill([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+        $user->fill([
+            'name' => $validateData->name,
+            'email' => $validateData->email,
+            'password' => Hash::make($validateData->password),
+        ]);
 
-            $user->save();
+        $user->save();
 
-            return redirect('/')->with(['status' => 'Registration successful!']);
-        }
+        return redirect('/')->with(['status' => 'Registration successful!']);
     }
 }
