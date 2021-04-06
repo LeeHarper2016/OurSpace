@@ -39,10 +39,10 @@ class SpaceRequest extends FormRequest
             case 'PATCH':
             case 'PUT': {
                 return [
-                    'name' => 'required',
+                    'name' => ['required', 'unique:App\Models\Space,name'],
                     'description' => 'required',
-                    'icon_picture' => 'image',
-                    'banner_picture' => 'image'
+                    'icon_picture' => ['image', 'max:100000'],
+                    'banner_picture' => ['image', 'max:100000']
                 ];
             }
             default: break;
