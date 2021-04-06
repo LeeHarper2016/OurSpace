@@ -8,11 +8,11 @@
             @csrf
             <div class="flex flex-col">
                 <label for="name">Name:</label>
-                <input type="text" name="name" />
+                <input type="text" name="name" value="{{ old('name') }}" />
             </div>
             <div class="flex flex-col">
                 <label for="description">Description:</label>
-                <textarea rows="10" cols="30" name="description"></textarea>
+                <textarea rows="10" cols="30" name="description">{{ old('description') }}</textarea>
             </div>
             <div class="flex flex-col">
                 <label for="icon_picture">Icon Picture:</label>
