@@ -30,7 +30,7 @@ class SpaceRequest extends FormRequest
         switch($this->method()) {
             case 'POST':{
                 return [
-                    'name' => 'required',
+                    'name' => ['required', 'unique:App\Models\Space,name'],
                     'description' => 'required',
                     'icon_picture' => ['image', 'max:100000', 'required'],
                     'banner_picture' => ['image', 'max:100000', 'required']
