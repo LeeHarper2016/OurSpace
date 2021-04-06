@@ -7,6 +7,22 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginRequest extends FormRequest
 {
+
+    /*********************************************************************
+     *
+     * Function Name: LoginRequest.attributes().
+     * Purpose: Sets the attribute names for the field values.
+     *
+     * @return array
+     *
+     ********************************************************************/
+    public function attributes() {
+        return [
+            'email' => 'email address',
+            'body' => 'password'
+        ];
+    }
+
     /*********************************************************************
      *
      * Function Name: LoginRequest.authorize().
