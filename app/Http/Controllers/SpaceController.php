@@ -20,7 +20,6 @@ class SpaceController extends Controller
      * Post-condition: The image is uploaded to the server.
      *
      * @param Space $space The space the current user is being assigned to.
-     * @param bool $isOwner Determines if the user is the owner of the space.
      * @return string The final relative file path to the image.
      *
      **************************************************************************/
