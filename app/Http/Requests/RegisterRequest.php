@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'unique:App\Models\User,email',
             'password' => ['required', 'same:passwordCheck'],
-            'passwordCheck' => 'required'
+            'passwordConfirm' => 'required'
         ];
     }
 }
