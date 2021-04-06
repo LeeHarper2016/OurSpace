@@ -19,7 +19,7 @@ class LoginRequest extends FormRequest
     public function attributes() {
         return [
             'email' => 'email address',
-            'body' => 'password'
+            'password' => 'password'
         ];
     }
 
@@ -46,7 +46,7 @@ class LoginRequest extends FormRequest
     public function rules() {
         return [
             'email' => 'required',
-            'body' => 'required'
+            'password' => 'required'
         ];
     }
 }
