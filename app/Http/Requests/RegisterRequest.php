@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
     public function rules() {
         return [
             'name' => 'required',
-            'email' => 'unique:App\Models\User,email_address',
+            'email' => 'unique:App\Models\User,email',
             'password' => ['required', 'same:passwordCheck'],
             'passwordCheck' => 'required'
         ];
