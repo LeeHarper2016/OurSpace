@@ -16,7 +16,7 @@ class LoginRequest extends FormRequest
      *
      ********************************************************************/
     public function authorize() {
-        return is_null(Auth::user()->getKey());
+        return is_null(Auth::user());
     }
 
     /*********************************************************************
