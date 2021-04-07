@@ -27,6 +27,7 @@ Route::get('/login', [LoginController::class, 'view']);
 Route::get('/logout', [LoginController::class, 'logOutUser']);
 
 Route::resource('spaces', SpaceController::class);
+Route::get('spaces/{space}/join', [SpaceController::class, 'join']);
 
 Route::post('/spaces/{space}/particles', [ParticleController::class, 'store'])
     ->name('particles.store');
