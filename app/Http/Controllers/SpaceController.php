@@ -19,19 +19,26 @@ class SpaceController extends Controller
      * Precondition: N/A.
      * Post-condition: The image is uploaded to the server.
      *
+     * TODO: Clean the $userAlreadyInSpace implementation.
+     *
      * @param Space $space The space the current user is being assigned to.
-     * @return string The final relative file path to the image.
      *
      **************************************************************************/
     private function assignUserToSpace(Space $space) {
-        $spaceConnection = new UserInSpace;
+        $userAlreadyInSpace = UserInSpace::all()->filter(function ($connection) use ($space) {
+            return $connection->user_id === auth()->user()->id && $connection->space_id === $space->id;
+        })->count();
 
-        $spaceConnection->fill([
-            'user_id' => auth()->user()->id,
-            'space_id' => $space->id
-        ]);
+        if ($userAlreadyInSpace === 0) {
+            $spaceConnection = new UserInSpace;
 
-        $spaceConnection->save();
+            $spaceConnection->fill([
+                'user_id' => auth()->user()->id,
+                'space_id' => $space->id
+            ]);
+
+            $spaceConnection->save();
+        }
     }
 
     /***************************************************************************
@@ -69,6 +76,8 @@ class SpaceController extends Controller
             $space = Space::find($id);
 
             $this->assignUserToSpace($space);
+
+            return redirect('/spaces/' . $id)->with(['status' => 'Successfully joined the space.']);
         } else {
             return back()->withErrors('You are not currently logged in.');
         }
