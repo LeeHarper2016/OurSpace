@@ -55,6 +55,27 @@ class SpaceController extends Controller
 
     /***************************************************************************
      *
+     * Function: SpaceController.join(int $id)
+     * Purpose: Allows a user to join a specified space.
+     * Precondition: N/A.
+     * Post-condition: N/A.
+     *
+     * @param int $id The ID of the space the user wants to join.
+     * @return mixed The view containing the list of spaces.
+     *
+     *************************************************************************/
+    public function join(int $id) {
+        if (!is_null(auth()->user())) {
+            $space = Space::find($id);
+
+            $this->assignUserToSpace($space);
+        } else {
+            return back()->withErrors('You are not currently logged in.');
+        }
+    }
+
+    /***************************************************************************
+     *
      * Function: SpaceController.index()
      * Purpose: Displays a list of all public spaces.
      * Precondition: N/A.
