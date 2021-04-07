@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\ParticleRequest;
 
 use App\Models\Particle;
-use Illuminate\Http\Request;
 
 class ParticleController extends Controller
 {
@@ -17,14 +16,12 @@ class ParticleController extends Controller
      * Postcondition: The particle is added to the database.
      *
      * @param int $spaceId The ID of the current space
-     * @param Request $request The whole http request.
-     * @return RedirectResponse Redirection back to the original page.
+     * @param ParticleRequest $request The whole http request.
+     * @return mixed Redirection back to the original page.
      *
      ************************************************************************/
-    public function store(int $spaceId, Request $request) {
-        $validatedData = $request->validate([
-            'body' => ['required']
-        ]);
+    public function store(int $spaceId, ParticleRequest $request) {
+        $validatedData = $request->validated();
 
         $particle = new Particle;
         $particle->fill([
