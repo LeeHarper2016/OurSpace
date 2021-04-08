@@ -21,7 +21,7 @@ export default {
         onSubmit() {
             axios.post("/spaces/" + this.space +  "/particles", { body: this.body })
                 .catch((error) => {
-                    this.errorList.addError(error.message)
+                    this.errorList.addError('The particle failed to post.')
                 });
         }
     }
