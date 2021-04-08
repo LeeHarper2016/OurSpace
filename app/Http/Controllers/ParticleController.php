@@ -7,6 +7,7 @@ use App\Http\Requests\ParticleRequest;
 use App\Models\Particle;
 use App\Models\Space;
 use Exception;
+use Illuminate\Support\Facades\Gate;
 
 class ParticleController extends Controller
 {
@@ -25,16 +26,23 @@ class ParticleController extends Controller
      *************************************************************************/
     public function store(int $spaceId, ParticleRequest $request) {
         $validatedData = $request->validated();
+        $response = Gate::inspect('create', Particle::class);
 
-        $particle = new Particle;
-        $particle->fill([
-            'user_id' => auth()->user()->id,
-            'space_id' => $spaceId,
-            'body' => $validatedData['body']
-        ]);
+        if ($response->allowed()) {
+            $particle = new Particle;
+            $particle->fill([
+                'user_id' => auth()->user()->id,
+                'space_id' => $spaceId,
+                'body' => $validatedData['body']
+            ]);
 
-        $particle->save();
+            $particle->save();
 
-        return response('')->setStatusCode(201);
+            return response()
+                ->json(['message' => 'The particle was successfully posted.'], 201);
+        } else {
+            return response()
+                ->json(['message' => $response->message()], 401);
+        }
     }
 }
