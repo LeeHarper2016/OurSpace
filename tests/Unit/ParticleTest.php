@@ -40,6 +40,6 @@ class ParticleTest extends TestCase
         $response = $this->actingAs($user)
             ->post('/spaces/1/particles', ['body' => 'test']);
 
-        $response->assertStatus(201);
+        $response->assertStatus(401);
     }
 }
