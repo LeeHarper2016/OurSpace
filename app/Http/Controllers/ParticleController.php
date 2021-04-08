@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ParticleRequest;
 
 use App\Models\Particle;
+use App\Models\Space;
+use Exception;
 
 class ParticleController extends Controller
 {
@@ -17,9 +19,10 @@ class ParticleController extends Controller
      *
      * @param int $spaceId The ID of the current space
      * @param ParticleRequest $request The whole http request.
+     * @throws Exception
      * @return mixed Redirection back to the original page.
      *
-     ************************************************************************/
+     *************************************************************************/
     public function store(int $spaceId, ParticleRequest $request) {
         $validatedData = $request->validated();
 
@@ -32,6 +35,6 @@ class ParticleController extends Controller
 
         $particle->save();
 
-        return back();
+        return response('')->setStatusCode(201);
     }
 }
