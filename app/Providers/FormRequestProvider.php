@@ -15,7 +15,9 @@ class FormRequestProvider extends ServiceProvider
     public function register()
     {
         $this->app->resolving(FormRequest::class, function ($request, $app) {
-            $request->merge($request->route()->parameters());
+            if (!is_null($request->route())) {
+                $request->merge($request->route()->parameters());
+            }
         });
     }
 
