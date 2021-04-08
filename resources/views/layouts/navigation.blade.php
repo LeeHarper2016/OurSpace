@@ -19,13 +19,14 @@
     @endauth
     @guest
         <navbar-menu>
-            <template #rightSide>
-                <a href="{{ url('/register') }}" class="p-3 bg-purple-700 hover:bg-purple-600 duration-200 border-2
-                border-black rounded-md">
+            <template #left-menu>
+                <a href="{{ url('/') }}" class="text-black font-bold">{{ env('APP_NAME') }}</a>
+            </template>
+            <template #right-menu>
+                <a href="{{ url('/register') }}" class="text-black">
                     Register
                 </a>
-                <a href="{{ url('/login') }}" class="p-3 bg-purple-700 hover:bg-purple-600 duration-200 border-2
-                border-black rounded-md">
+                <a href="{{ url('/login') }}" class="text-black">
                     Log In
                 </a>
             </template>
