@@ -45,7 +45,7 @@ class RegisterController extends Controller
         $user->fill([
             'name' => $validateData['name'],
             'email' => $validateData['email'],
-            'password' => Hash::make($validateData['password']),
+            'password' => $validateData['password']
         ]);
 
         $user->save();
