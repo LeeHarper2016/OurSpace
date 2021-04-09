@@ -13,6 +13,10 @@
             <label for="password">Password:</label>
             <input type="password" name="password" />
         </div>
+        <div>
+            <input type="checkbox" name="rememberMe" />
+            <label for="rememberMe">Remember Session</label>
+        </div>
         <button type="submit" class="p-3 bg-gray-400 border border-black rounded w-20 ml-auto mr-auto">Submit</button>
     </form>
 </div>
