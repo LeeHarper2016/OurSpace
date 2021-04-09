@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\LoginRequest;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -36,26 +34,24 @@ class LoginController extends Controller
      *                errors if not..
      *
      * @param LoginRequest $request The total http request.
-     * @return Response Redirection to the homepage if successful, but to the form
+     * @return mixed Redirection to the homepage if successful, but to the form
      *                  if there are any errors.
      *
      ****************************************************************************/
     public function loginUser(LoginRequest $request) {
         $validatedData = $request->validated();
 
-        $user = User::firstWhere(['email' => $validatedData['email']]);
+        $user = array(
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password']
+        );
 
-        if (isset($user)) {
-            if (Hash::check($validatedData['password'], $user->password)) {
-                Auth::login($user);
-                $request->session()->regenerate();
+        if (Auth::attempt($user, isset($validatedData['rememberMe']))) {
+            $request->session()->regenerate();
 
-                return redirect()->intended('/');
-            } else {
-                return back()->withErrors(['The password entered is incorrect.']);
-            }
+            return redirect()->intended('/');
         } else {
-            return back()->withErrors(['This email is not associated with an account.']);
+            return back()->withErrors(['These credentials do not match an account.']);
         }
     }
 
