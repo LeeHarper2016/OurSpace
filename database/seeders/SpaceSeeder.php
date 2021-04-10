@@ -8,8 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SpaceSeeder extends Seeder
 {
-    use RefreshDatabase;
-    
     /**
      * Run the database seeds.
      *
