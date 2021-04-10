@@ -5,42 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SpaceRequest;
 use App\Models\Particle;
 use App\Models\Space;
-use App\Models\UserInSpace;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
-class SpaceController extends Controller
-{
-    /***************************************************************************
-     *
-     * Function: SpaceController.assignUserToSpace(Space $space)
-     * Purpose: Uploads an image to the server using a given path.
-     * Precondition: N/A.
-     * Post-condition: The image is uploaded to the server.
-     *
-     * TODO: Clean the $userAlreadyInSpace implementation.
-     *
-     * @param Space $space The space the current user is being assigned to.
-     *
-     **************************************************************************/
-    private function assignUserToSpace(Space $space) {
-        $userAlreadyInSpace = UserInSpace::all()->filter(function ($connection) use ($space) {
-            return $connection->user_id === auth()->user()->id && $connection->space_id === $space->id;
-        })->count();
-
-        if ($userAlreadyInSpace === 0) {
-            $spaceConnection = new UserInSpace;
-
-            $spaceConnection->fill([
-                'user_id' => auth()->user()->id,
-                'space_id' => $space->id
-            ]);
-
-            $spaceConnection->save();
-        }
-    }
-
+class SpaceController extends Controller {
     /***************************************************************************
      *
      * Function: SpaceController.uploadImage(string $imagePath, UploadedFile $image)
@@ -75,7 +44,7 @@ class SpaceController extends Controller
         if (!is_null(auth()->user())) {
             $space = Space::find($id);
 
-            $this->assignUserToSpace($space);
+            $space->users()->attach(auth()->user());
 
             return redirect('/spaces/' . $id)->with(['status' => 'Successfully joined the space.']);
         } else {
@@ -155,7 +124,7 @@ class SpaceController extends Controller
 
             $space->save();
 
-            $this->assignUserToSpace($space);
+            $space->users()->attach(auth()->user());
 
             return redirect('/')->with(['status' => 'success']);
         } else {
