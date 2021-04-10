@@ -4,10 +4,13 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
+    use RefreshDatabase;
+
     /**
      * The name of the factory's corresponding model.
      *

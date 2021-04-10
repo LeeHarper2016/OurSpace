@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Space;
 use Illuminate\Database\Seeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SpaceSeeder extends Seeder
 {
+    use RefreshDatabase;
+    
     /**
      * Run the database seeds.
      *
