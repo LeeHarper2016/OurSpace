@@ -20,6 +20,21 @@ class Space extends Model
         'banner_picture_path'
     ];
 
+
+    /********************************************************************
+     *
+     * Function: Space.owner()
+     * Purpose: Retrieve the owner user of the space.
+     * Precondition: N/A.
+     * Posctondition: N/A.
+     *
+     * @return BelongsTo The user model of the owner of the space.
+     *
+     *******************************************************************/
+    public function owner() {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
     /********************************************************************
      *
      * Function: Space.users()
