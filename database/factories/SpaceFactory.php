@@ -30,4 +30,18 @@ class SpaceFactory extends Factory
             'banner_picture_path' => $this->faker->imageUrl()
         ];
     }
+
+    /*******************************************************************************
+     * Function: SpaceFactory.configure().
+     * Purpose: Configures the Space model factory, mainly attaching the owner as
+     *          a user of the space.
+     *
+     * @return SpaceFactory The configured SpaceFactory object.
+     *
+     ******************************************************************************/
+    public function configure() {
+        return $this->afterCreating(function (Space $space) {
+            $space->users()->attach($space->owner->id);
+        });
+    }
 }
