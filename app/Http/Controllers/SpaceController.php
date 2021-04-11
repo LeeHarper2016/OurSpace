@@ -5,29 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SpaceRequest;
 use App\Models\Particle;
 use App\Models\Space;
-use Illuminate\Http\UploadedFile;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class SpaceController extends Controller {
-    /***************************************************************************
-     *
-     * Function: SpaceController.uploadImage(string $imagePath, UploadedFile $image)
-     * Purpose: Uploads an image to the server using a given path.
-     * Precondition: N/A.
-     * Post-condition: The image is uploaded to the server.
-     *
-     * @param String $imagePath The path that the image will be saved to.
-     * @param UploadedFile $image The image that will be saved to the server.
-     * @return string The final relative file path to the image.
-     *
-     *************************************************************************/
-    private function uploadImage(string $imagePath, UploadedFile $image) {
-        $imageName = $image->hashName();
-        $image->store($imagePath);
-
-        return $imagePath . $imageName;
-    }
 
     /***************************************************************************
      *
@@ -110,8 +92,8 @@ class SpaceController extends Controller {
             $iconImagePath = 'images/space_icons/';
             $bannerImagePath = 'images/banner_images/';
 
-            $finalIconPath = $this->uploadImage($iconImagePath, $validatedData['icon_picture']);
-            $finalBannerPath = $this->uploadImage($bannerImagePath, $validatedData['banner_picture']);
+            $finalIconPath = ImageService::uploadImage($validatedData['icon_picture'], $iconImagePath);
+            $finalBannerPath = ImageService::uploadImage($validatedData['banner_picture'], $bannerImagePath);
 
             $space = new Space;
             $space->fill([
@@ -254,18 +236,16 @@ class SpaceController extends Controller {
         $response = Gate::inspect('delete', $space);
 
         if ($response->allowed()) {
-            if (isset($space)) {
-                if (Storage::exists($space->icon_picture_path)) {
-                    Storage::delete($space->icon_picture_path);
-                }
-                if (Storage::exists($space->banner_picture_path)) {
-                    Storage::delete($space->banner_picture_path);
-                }
+            ImageService::deleteImage($space->icon_picture_path);
+            ImageService::deleteImage($space->banner_picture_path);
 
-                $space->delete();
-
-                return redirect('/')->with(['status' => 'success']);
+            if (Storage::exists($space->banner_picture_path)) {
+                Storage::delete($space->banner_picture_path);
             }
+
+            $space->delete();
+
+            return redirect('/')->with(['status' => 'success']);
         } else {
             return back()
                 ->withErrors($response->message());
