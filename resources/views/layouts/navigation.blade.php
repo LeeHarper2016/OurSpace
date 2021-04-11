@@ -12,7 +12,11 @@
                     </navbar-dropdown-menu>
                 @endif
                 <navbar-dropdown-menu :items='[{name: "Profile", link: "/users/{{ auth()->user()->id }}"}, {name: "Edit Account", link: "/users/{{ auth()->user()->id }}/edit"}, {name: "Log Out", link: "/logout"} ]'>
-                    <template #nav-option>{{ auth()->user()->name }}</template>
+                    <template #nav-option>
+                        <img class="inline rounded-full mr-2" src="{{ asset(auth()->user()->avatar) }}" width="32"
+                             height="32" />
+                        {{ auth()->user()->name }}
+                    </template>
                 </navbar-dropdown-menu>
             </template>
         </navbar-menu>
