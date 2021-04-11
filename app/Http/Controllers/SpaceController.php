@@ -132,6 +132,7 @@ class SpaceController extends Controller {
         $space = Space::find($id);
         $particles = Particle::with('user')
             ->where('space_id', $id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('spaces.home')->with(['space' => $space, 'particles' => $particles]);
