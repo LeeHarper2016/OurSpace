@@ -20,6 +20,10 @@ export default {
     methods: {
         onSubmit() {
             axios.post("/spaces/" + this.space +  "/particles", { body: this.body })
+                .then((res) => {
+                    this.body = '';
+                    this.$root.$emit('newParticle', res);
+                })
                 .catch((error) => {
                     this.errorList.addError('The particle failed to post.')
                 });
