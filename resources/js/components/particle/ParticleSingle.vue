@@ -8,7 +8,7 @@
                 <p class="inline">
                     <slot></slot>
                 </p>
-                <small class="block mt-3">Created at {{ Date(particle.created_at) }}</small>
+                <small class="block mt-3">Created at {{ new Date(particle.created_at) }}</small>
                 <hr />
             </div>
         </div>
