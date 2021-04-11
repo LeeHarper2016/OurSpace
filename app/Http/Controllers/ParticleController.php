@@ -39,7 +39,7 @@ class ParticleController extends Controller
             $particle->save();
 
             return response()
-                ->json(['message' => 'The particle was successfully posted.'], 201);
+                ->json(['particle' => $particle, 'avatar' => $particle->user->avatar], 201);
         } else {
             return response()
                 ->json(['message' => $response->message()], 401);
