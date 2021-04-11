@@ -1,11 +1,11 @@
 <template>
     <div class="relative pointer-events-none w-full">
-        <error-message @delete="removeError($event)"
+        <ErrorMessage @delete="removeError($event)"
                        v-for="error in this.errorList.getErrors()"
                        :id="error.id"
                        :key="error.id">
             {{ error.message }}
-        </error-message>
+        </ErrorMessage>
     </div>
 </template>
 
