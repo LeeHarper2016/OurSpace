@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -40,11 +41,14 @@ class RegisterController extends Controller
     public function registerUser(RegisterRequest $request) {
         $validateData = $request->validated();
 
-        $user = new User;
+        $pathToAvatars = 'images/avatar_images/';
+        $avatarFilePath = ImageService::uploadImage($validateData['avatar'], $pathToAvatars);
 
+        $user = new User;
         $user->fill([
             'name' => $validateData['name'],
             'email' => $validateData['email'],
+            'avatar' => $avatarFilePath,
             'password' => $validateData['password']
         ]);
 
