@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ImageService {
 
@@ -23,5 +24,22 @@ class ImageService {
         $image->store($path);
 
         return $path . $imageName;
+    }
+
+    /*********************************************************************************
+     *
+     * Function: ImageService::deleteImage(string $path)
+     * Purpose: Deletes an image, if it exists, from the server at the given file path.
+     * Precondition: The image exists on the server.
+     * Postcondition: The image is deleted from the server.
+     *
+     * @param string $path The path to the file which should be deleted.
+     * @return void
+     *
+     ********************************************************************************/
+    public static function deleteImage(string $path) {
+        if (Storage::exists($path)) {
+            Storage::delete($path);
+        }
     }
 }
