@@ -32,6 +32,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'unique:App\Models\User,email',
+            'avatar' => ['image', 'max:100000'],
             'password' => ['required', 'same:passwordConfirm'],
             'passwordConfirm' => 'required'
         ];
