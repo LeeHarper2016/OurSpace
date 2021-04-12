@@ -26,7 +26,7 @@
     </head>
     <body class="antialiased">
         <div id="app">
-            <div class="block bg-white w-full h-20 border-b-2 border-purple-900">
+            <div class="block bg-white w-full border-b-2 border-purple-900">
                  @include('layouts.navigation')
             </div>
             <div class="flex min-h-screen h-full">
