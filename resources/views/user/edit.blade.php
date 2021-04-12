@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="flex flex-col items-center mt-10">
-        <img src="{{ asset($user->icon_picture_path) }}" width="200" height="200" />
+        <img src="{{ asset($user->avatar) }}" width="200" height="200" />
         <h1 class="text-4xl font-bold">Account Details</h1>
         <form method="post" action="{{ route('user.edit')  }}" enctype="multipart/form-data"
               class="flex flex-col mr-auto ml-auto space-y-5 mt-5">
@@ -15,8 +15,8 @@
                 <input type="text" name="email" id="email" value="{{ $user->email }}" />
             </div>
             <div class="flex flex-col">
-                <label for="icon_picture">Icon Picture:</label>
-                <input type="file" name="icon_picture" />
+                <label for="avatar">Avatar:</label>
+                <input type="file" name="avatar" />
             </div>
             <div class="flex flex-col">
                 <label for="password">Password:</label>
