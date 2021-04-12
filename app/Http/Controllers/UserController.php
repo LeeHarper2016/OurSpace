@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 
@@ -45,19 +46,25 @@ class UserController extends Controller
      ******************************************************************/
     public function update(Request $request) {
         $user = auth()->user();
+        $avatarFilePath = 'images/avatar_images/';
 
         if (isset($user)) {
-            $validatedDate = $request->validate([
+            $validatedData = $request->validate([
                 'name' => 'required',
-                'email' => 'required'
+                'email' => ['required', 'unique:App\Models\User,email,' . $user->id],
+                'avatar' => ['image', 'max:100000'],
             ]);
 
-            $user->fill($validatedDate)
+            if (isset($validatedData['avatar'])) {
+                $validatedData['avatar'] = ImageService::uploadImage($validatedData['avatar'], $avatarFilePath);
+            }
+
+            $user->fill($validatedData)
                 ->save();
 
             return redirect('/')->with(['status' => 'Success']);
         } else {
-            return redirect('/')->withErrors('You are not currently logged in.');
+            return back()->withErrors('You are not currently logged in.');
         }
     }
 }
