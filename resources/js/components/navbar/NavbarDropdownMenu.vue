@@ -4,7 +4,9 @@
             <slot name="nav-option"></slot>
         </span>
         <transition name="slide">
-            <ul class="block text-black text-left absolute w-64 space-y-2 bg-white rounded-md p-2 border border-t-none"
+            <ul class="block divide-gray-500 text-black text-left absolute space-y-2 bg-white rounded-md p-2 border border-t-none"
+                :class="(this.pin_right) ? 'right-0' : ''"
+                ref="hoverMenu"
                 v-if="userHoveredOverMenu">
                 <li v-for="item in items">
                     <a :href="item.link" v-text="item.name"></a>
@@ -27,7 +29,7 @@
 
 <script>
 export default {
-    props: ['items'],
+    props: ['items', 'pin_right'],
     data() {
         return {
             userHoveredOverMenu: false
